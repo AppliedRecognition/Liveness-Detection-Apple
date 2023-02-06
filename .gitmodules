@@ -1,0 +1,3 @@
+[submodule "LivenessDetectionTests/Models"]
+	path = LivenessDetectionTests/Models
+	url = https://github.com/AppliedRecognition/Liveness-Detection-Models.git
