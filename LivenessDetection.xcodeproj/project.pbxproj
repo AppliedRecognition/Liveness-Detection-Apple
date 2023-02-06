@@ -34,6 +34,7 @@
 /* Begin PBXFileReference section */
 		3B97F6D0298E7A0D008DD426 /* Models */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = Models; path = LivenessDetectionTests/Models; sourceTree = SOURCE_ROOT; };
 		3BA86E572991769100006E0B /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		3BA86E592991908100006E0B /* LivenessDetection.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LivenessDetection.podspec; sourceTree = "<group>"; };
 		3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LivenessDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB094298D1DF4009F73C3 /* LivenessDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LivenessDetection.h; sourceTree = "<group>"; };
 		3BADB095298D1DF4009F73C3 /* LivenessDetection.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LivenessDetection.docc; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 		3BADB087298D1DF3009F73C3 = {
 			isa = PBXGroup;
 			children = (
+				3BA86E592991908100006E0B /* LivenessDetection.podspec */,
 				3BA86E572991769100006E0B /* build.sh */,
 				3BADB093298D1DF4009F73C3 /* LivenessDetection */,
 				3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */,
