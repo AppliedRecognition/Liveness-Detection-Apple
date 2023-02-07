@@ -87,10 +87,11 @@ final class LivenessDetectionTests: XCTestCase {
     func test_featureProviderFromInputSpeed() throws {
         let cgImage = try self.loadTestCGImage()
         let wavelet: Array2D<UInt8> = try self.moireDetection.processImage(cgImage)
-        var imgLL = try self.moireDetection.waveletDecomposition.haarTransformArray(wavelet).0
+        let imgLL = try self.moireDetection.waveletDecomposition.haarTransformArray(wavelet).0
         measure {
-            _ = try! self.moireDetection.multiArrayFromTransform(&imgLL, name: "input_1")
+            _ = try! self.moireDetection.multiArrayFromTransform(imgLL, name: "input_1")
         }
+        imgLL.deallocate()
     }
     
     func test_measureFeatureProviderCreationSpeed() throws {
@@ -101,6 +102,10 @@ final class LivenessDetectionTests: XCTestCase {
         measure {
             _ = try! self.moireDetection.featureProviderFromInput(multiArrays)
         }
+        imgLL.deallocate()
+        imgLH.deallocate()
+        imgHL.deallocate()
+        imgHH.deallocate()
     }
     
     func test_measureMoireDetectorPredictionSpeed() throws {
@@ -112,6 +117,10 @@ final class LivenessDetectionTests: XCTestCase {
         measure {
             _ = try! self.moireDetection.predictionFromFeatureProvider(featureProvider)
         }
+        imgLL.deallocate()
+        imgLH.deallocate()
+        imgHL.deallocate()
+        imgHH.deallocate()
     }
     
     func ignore_testLivenessDetection() throws {

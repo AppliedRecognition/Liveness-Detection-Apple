@@ -13,14 +13,22 @@ class WaveletDecomposition {
     let height: Int = 375
     let depth: Int = 1
     
-    func haarTransformArray(_ array: Array2D<UInt8>) throws -> ([Float], [Float], [Float], [Float]) {
+    func haarTransformArray(_ array: Array2D<UInt8>) throws -> (UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>) {
         let dwt2d = try self.fwdHaarDWT2D(array)
         var (cA, cH, cV, cD): ([Float],[Float],[Float],[Float]) = try self.splitFreqBands(dwt2d)
         try self.scaleData(&cA, min: 0, max: 1)
         try self.scaleData(&cH, min: -1, max: 1)
         try self.scaleData(&cV, min: -1, max: 1)
         try self.scaleData(&cD, min: -1, max: 1)
-        return (cA, cH, cV, cD)
+        let ptrCa = UnsafeMutablePointer<Float>.allocate(capacity: cA.count)
+        ptrCa.initialize(from: &cA, count: cA.count)
+        let ptrCh = UnsafeMutablePointer<Float>.allocate(capacity: cH.count)
+        ptrCh.initialize(from: &cH, count: cH.count)
+        let ptrCv = UnsafeMutablePointer<Float>.allocate(capacity: cV.count)
+        ptrCv.initialize(from: &cV, count: cV.count)
+        let ptrCd = UnsafeMutablePointer<Float>.allocate(capacity: cD.count)
+        ptrCd.initialize(from: &cD, count: cD.count)
+        return (ptrCa, ptrCh, ptrCv, ptrCd)
     }
     
     func scaleData(_ data: inout [Float], min: Float, max: Float) throws {

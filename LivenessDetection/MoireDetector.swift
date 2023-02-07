@@ -53,6 +53,10 @@ public class MoireDetector {
         let multiArrays = ["input_1": imgLL, "input_2": imgLH, "input_3": imgHL, "input_4": imgHH]
         let featureProvider = try self.featureProviderFromInput(multiArrays)
         let prediction = try self.predictionFromFeatureProvider(featureProvider)
+        imgLL.deallocate()
+        imgLH.deallocate()
+        imgHL.deallocate()
+        imgHH.deallocate()
         return prediction[0].floatValue
     }
     
@@ -63,31 +67,15 @@ public class MoireDetector {
         return prediction
     }
     
-    func multiArrayFromTransform(_ transform: [[Float]], name: String) throws -> MLMultiArray {
+    func multiArrayFromTransform(_ transform: UnsafeMutablePointer<Float>, name: String) throws -> MLMultiArray {
         let shape = [1, 375, 500, 1] as [NSNumber]
         let strides = [187500, 500, 1, 1] as [NSNumber]
-        var flattenedInput = transform.flatMap { $0 }
-        return try MLMultiArray(dataPointer: &flattenedInput, shape: shape, dataType: .float32, strides: strides)
+        return try MLMultiArray(dataPointer: transform, shape: shape, dataType: .float32, strides: strides)
     }
     
-    func multiArrayFromTransform(_ transform: inout [Float], name: String) throws -> MLMultiArray {
-        let shape = [1, 375, 500, 1] as [NSNumber]
-        let strides = [187500, 500, 1, 1] as [NSNumber]
-        return try MLMultiArray(dataPointer: &transform, shape: shape, dataType: .float32, strides: strides)
-    }
-    
-    func featureProviderFromInput(_ input: [String:[[Float]]]) throws -> MLDictionaryFeatureProvider {
+    func featureProviderFromInput(_ input: [String: UnsafeMutablePointer<Float>]) throws -> MLDictionaryFeatureProvider {
         let multis = try input.map { k, v in
-            (k, try self.multiArrayFromTransform(v, name: k))
-        }
-        let dict = multis.reduce(into: [String:MLFeatureValue](), { $0[$1.0] = MLFeatureValue(multiArray: $1.1) })
-        return try MLDictionaryFeatureProvider(dictionary: dict)
-    }
-    
-    func featureProviderFromInput(_ input: [String:[Float]]) throws -> MLDictionaryFeatureProvider {
-        let multis = try input.map { k, v in
-            var ar = v
-            return (k, try self.multiArrayFromTransform(&ar, name: k))
+            return (k, try self.multiArrayFromTransform(v, name: k))
         }
         let dict = multis.reduce(into: [String:MLFeatureValue](), { $0[$1.0] = MLFeatureValue(multiArray: $1.1) })
         return try MLDictionaryFeatureProvider(dictionary: dict)
@@ -119,7 +107,11 @@ public class MoireDetector {
         let originalBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: originalLength)
         var originalBuffer = vImage_Buffer(data: originalBytes, height:vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.bytesPerRow)
         defer {
-            originalBuffer.free()
+            if #available(iOS 13, *) {
+                originalBuffer.free()
+            } else {
+                originalBytes.deallocate()
+            }
         }
         var error = vImageBuffer_InitWithCGImage(&originalBuffer, &format, nil, cgImage, numericCast(kvImageNoAllocate))
         guard error == kvImageNoError else {
@@ -132,7 +124,11 @@ public class MoireDetector {
         let outPixels = UnsafeMutablePointer<UInt8>.allocate(capacity: outLength)
         var outputPlanar = vImage_Buffer(data: outPixels, height: vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.width)
         defer {
-            outputPlanar.free()
+            if #available(iOS 13, *) {
+                outputPlanar.free()
+            } else {
+                outPixels.deallocate()
+            }
         }
         let divisor: Float = 0x1000
         var matrix: [Int16] = [0,Int16(0.299*divisor),Int16(0.587*divisor),Int16(0.114*divisor)]
@@ -173,7 +169,11 @@ public class MoireDetector {
         let rotatedData = UnsafeMutablePointer<UInt8>.allocate(capacity: destSize)
         var outBuffer = vImage_Buffer(data: rotatedData, height: outHeight, width: outWidth, rowBytes: outBytesPerRow)
         defer {
-            outBuffer.free()
+            if #available(iOS 13, *) {
+                outBuffer.free()
+            } else {
+                rotatedData.deallocate()
+            }
         }
         guard vImageRotate90_Planar8(&image, &outBuffer, rotation, 0, numericCast(kvImageNoFlags)) == kvImageNoError else {
             throw ImageProcessingError.imageRotationError
@@ -190,7 +190,11 @@ public class MoireDetector {
         grayscalePixels.initialize(from: &input, count: input.count)
         var grayscaleBuffer = vImage_Buffer(data: grayscalePixels, height: vImagePixelCount(grayscaleArray.rows), width: vImagePixelCount(grayscaleArray.cols), rowBytes: grayscaleArray.cols)
         defer {
-            grayscaleBuffer.free()
+            if #available(iOS 13, *) {
+                grayscaleBuffer.free()
+            } else {
+                grayscalePixels.deallocate()
+            }
         }
         var error: Int = kvImageNoError
         guard let target = vImageCreateCGImageFromBuffer(&grayscaleBuffer, &targetFormat, nil, nil, numericCast(kvImageNoFlags), &error) else {
