@@ -135,9 +135,10 @@ public class SpoofDeviceDetector {
 
 fileprivate class DetectionOperation: Operation {
     
-    let image: UIImage
+    var image: UIImage
     let request: VNCoreMLRequest
     var error: Error?
+    var maxSideLength: CGFloat = 400
     var results: [DetectedSpoofDevice] = []
     var minDecrementedSpoofScoreBoxToSideRatio: CGFloat
     var largeBoxScoreAdjustment: Float
@@ -152,6 +153,16 @@ fileprivate class DetectionOperation: Operation {
     
     override func main() {
         do {
+            let shorterSide = min(image.size.width, image.size.height)
+            var scaleTransform: CGAffineTransform = .identity
+            if shorterSide > self.maxSideLength {
+                let scale = self.maxSideLength / shorterSide
+                scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+                let scaledSize = self.image.size.applying(scaleTransform)
+                self.image = UIGraphicsImageRenderer(size: scaledSize).image { _ in
+                    self.image.draw(in: CGRect(origin: .zero, size: scaledSize))
+                }
+            }
             guard let cgImage = self.image.cgImage else {
                 throw ImageProcessingError.cgImageConversionError
             }
@@ -165,9 +176,20 @@ fileprivate class DetectionOperation: Operation {
                 try VNImageRequestHandler(cgImage: brighterImage, orientation: orientation).perform([self.request])
                 self.results = (self.request.results as? [VNRecognizedObjectObservation])?.map { DetectedSpoofDevice(observation: $0, imageSize: self.image.size) } ?? []
             }
+            let invertedScaleTransform: CGAffineTransform
+            if !scaleTransform.isIdentity {
+                invertedScaleTransform = scaleTransform.inverted()
+            } else {
+                invertedScaleTransform = .identity
+            }
             self.results = self.results.map { result in
                 if self.largeBoxScoreAdjustment != 0.0 && (result.boundingBox.width >= self.image.size.width * self.minDecrementedSpoofScoreBoxToSideRatio || result.boundingBox.height >= self.image.size.height * self.minDecrementedSpoofScoreBoxToSideRatio) {
                     return DetectedSpoofDevice(boundingBox: result.boundingBox, confidence: result.confidence + self.largeBoxScoreAdjustment)
+                }
+                return result
+            }.map { result in
+                if !invertedScaleTransform.isIdentity {
+                    return DetectedSpoofDevice(boundingBox: result.boundingBox.applying(invertedScaleTransform), confidence: result.confidence)
                 }
                 return result
             }.filter { $0.confidence > 0 }
