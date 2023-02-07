@@ -138,7 +138,7 @@ fileprivate class DetectionOperation: Operation {
     var image: UIImage
     let request: VNCoreMLRequest
     var error: Error?
-    var maxSideLength: CGFloat = 400
+    var maxSideLength: CGFloat = 4000
     var results: [DetectedSpoofDevice] = []
     var minDecrementedSpoofScoreBoxToSideRatio: CGFloat
     var largeBoxScoreAdjustment: Float
@@ -153,10 +153,10 @@ fileprivate class DetectionOperation: Operation {
     
     override func main() {
         do {
-            let shorterSide = min(image.size.width, image.size.height)
+            let longerSide = max(image.size.width, image.size.height)
             var scaleTransform: CGAffineTransform = .identity
-            if shorterSide > self.maxSideLength {
-                let scale = self.maxSideLength / shorterSide
+            if longerSide > self.maxSideLength {
+                let scale = self.maxSideLength / longerSide
                 scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
                 let scaledSize = self.image.size.applying(scaleTransform)
                 self.image = UIGraphicsImageRenderer(size: scaledSize).image { _ in
