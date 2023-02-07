@@ -133,7 +133,6 @@ public class SpoofDeviceDetector {
     }
 }
 
-@available(iOS 13.0, *)
 fileprivate class DetectionOperation: Operation {
     
     let image: UIImage
