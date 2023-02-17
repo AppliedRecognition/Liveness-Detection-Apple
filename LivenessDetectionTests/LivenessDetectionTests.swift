@@ -21,10 +21,39 @@ final class LivenessDetectionTests: BaseTest {
         self.moireDetector = try createMoireDetector()
     }
     
+    func test_livenessDetection_succeedsOn80PercentOfImages() throws {
+        let threshold: Float = 0.5
+        let maxFailRatio: Float = 0.2
+        var detectionCount: Float = 0
+        var failCount: Float = 0
+        let imageURLs = try self.imageURLs(types: [.moire, .spoofDevice])
+        for (url, positive) in imageURLs {
+            let moireConfidence = try self.moireDetector.detectMoireInImage(self.cgImage(at: url))
+            let spoofDeviceConfidence = try self.spoofDeviceDetector.detectSpoofDevicesInImage(self.image(at: url)).sorted(by: { $0.confidence > $1.confidence }).first?.confidence ?? 0.0
+            let success: Bool
+            if positive {
+                success = moireConfidence >= threshold || spoofDeviceConfidence >= threshold
+            } else {
+                success = moireConfidence < threshold && spoofDeviceConfidence < threshold
+            }
+            let prefix = positive ? "positive" : "negative"
+            if !success {
+                failCount += 1
+                NSLog("%@/%@ failed", prefix, url.lastPathComponent)
+            } else {
+                NSLog("%@/%@ succeeded", prefix, url.lastPathComponent)
+            }
+            detectionCount += 1
+        }
+        let failRatio = failCount / detectionCount
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
     func test_livenessDetection_attachAnnotatedImages() throws {
         let colours: [CGColor] = [UIColor.green.cgColor, UIColor.red.cgColor, UIColor.purple.cgColor, UIColor.cyan.cgColor]
         let archiveURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("zip")
-        guard var archive = Archive(url: archiveURL, accessMode: .create) else {
+        guard let archive = Archive(url: archiveURL, accessMode: .create) else {
             XCTFail("Failed to create zip archive")
             return
         }
