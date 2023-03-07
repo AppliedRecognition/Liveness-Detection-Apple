@@ -13,7 +13,18 @@ class BaseTest: XCTestCase {
     
     private var moireDetectorModelURL: URL!
     private var spoofDeviceDetectorModelURL: URL!
+    private var spoofDetectorModelURL: URL!
     private var imageURLs: [LivenessDetectionType:[Bool:[URL]]] = [:]
+    private static let indexURL = URL(string: "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/index.json")!
+    
+    override class func setUp() {
+        super.setUp()
+        do {
+            let cacheURL = try cacheURL(of: indexURL)
+            try FileManager.default.removeItem(at: cacheURL)
+        } catch {
+        }
+    }
 
     override func setUpWithError() throws {
         if let url = URL(string: "https://github.com/AppliedRecognition/Ver-ID-Models/raw/master/files/MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel") {
@@ -26,10 +37,12 @@ class BaseTest: XCTestCase {
         } else {
             throw NSError()
         }
-        guard let indexURL = URL(string: "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/index.json") else {
+        if let url = URL(string: "https://github.com/AppliedRecognition/Ver-ID-Models/raw/master/files/ARC_PSD-003_1.0.16_TRCD.mlmodel") {
+            self.spoofDetectorModelURL = try self.localURL(of: url)
+        } else {
             throw NSError()
         }
-        let indexData = try Data(contentsOf: self.localURL(of: indexURL))
+        let indexData = try Data(contentsOf: self.localURL(of: BaseTest.indexURL))
         let index: [String:[String:[String]]] = try JSONDecoder().decode([String:[String:[String]]].self, from: indexData)
         self.imageURLs.removeAll()
         try index.forEach({ key, val in
@@ -50,9 +63,13 @@ class BaseTest: XCTestCase {
         })
     }
     
-    func localURL(of url: URL) throws -> URL {
+    static func cacheURL(of url: URL) throws -> URL {
         let cacheURL = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let localURL = cacheURL.appendingPathComponent(url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/")))
+        return cacheURL.appendingPathComponent(url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/")))
+    }
+    
+    func localURL(of url: URL) throws -> URL {
+        let localURL = try BaseTest.cacheURL(of: url)
         if !FileManager.default.fileExists(atPath: localURL.path) {
             try FileManager.default.createDirectory(at: localURL.deletingLastPathComponent(), withIntermediateDirectories: true)
             let data = try Data(contentsOf: url)
@@ -134,6 +151,10 @@ class BaseTest: XCTestCase {
     
     func createSpoofDeviceDetector() throws -> SpoofDeviceDetector {
         return try SpoofDeviceDetector(modelURL: self.spoofDeviceDetectorModelURL)
+    }
+    
+    func createSpoofDetector() throws -> SpoofDetector3 {
+        return try SpoofDetector3(modelURL: self.spoofDetectorModelURL)
     }
 }
 

@@ -22,6 +22,8 @@
 		3BB2BCD8299FD49F00CCEA18 /* WaveletDecompositionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */; };
 		3BB2BCDA299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */; };
 		3BB2BCE0299FFB2A00CCEA18 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB2BCDF299FFB2A00CCEA18 /* ZIPFoundation */; };
+		3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */; };
+		3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		3BB2BCD5299FB47500CCEA18 /* MoireDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireDetectorTest.swift; sourceTree = "<group>"; };
 		3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveletDecompositionTest.swift; sourceTree = "<group>"; };
 		3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDeviceDetectorTest.swift; sourceTree = "<group>"; };
+		3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3.swift; sourceTree = "<group>"; };
+		3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 				3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */,
 				3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */,
 				3BADB0B9298D2290009F73C3 /* ImageProcessingError.swift */,
+				3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */,
 			);
 			path = LivenessDetection;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 				3BB2BCD5299FB47500CCEA18 /* MoireDetectorTest.swift */,
 				3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */,
 				3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */,
+				3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */,
 			);
 			path = LivenessDetectionTests;
 			sourceTree = "<group>";
@@ -245,6 +251,7 @@
 				3BADB0BA298D2290009F73C3 /* ImageProcessingError.swift in Sources */,
 				3BADB096298D1DF4009F73C3 /* LivenessDetection.docc in Sources */,
 				3BADB0B2298D1F88009F73C3 /* SpoofDeviceDetector.swift in Sources */,
+				3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB2BCD6299FB47500CCEA18 /* MoireDetectorTest.swift in Sources */,
+				3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */,
 				3BB2BCD4299FAB6400CCEA18 /* BaseTest.swift in Sources */,
 				3BB2BCD8299FD49F00CCEA18 /* WaveletDecompositionTest.swift in Sources */,
 				3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */,
@@ -305,7 +313,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001000;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -324,6 +332,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -369,7 +378,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001000;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -382,6 +391,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -398,7 +408,6 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1000002;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -412,7 +421,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetection;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -427,7 +435,6 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1000002;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -441,7 +448,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetection;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -456,10 +462,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -473,10 +477,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;

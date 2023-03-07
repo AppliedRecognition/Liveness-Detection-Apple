@@ -14,11 +14,13 @@ final class LivenessDetectionTests: BaseTest {
     
     var spoofDeviceDetector: SpoofDeviceDetector!
     var moireDetector: MoireDetector!
+    var spoofDetector: SpoofDetector3!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         self.spoofDeviceDetector = try createSpoofDeviceDetector()
         self.moireDetector = try createMoireDetector()
+        self.spoofDetector = try createSpoofDetector()
     }
     
     func test_livenessDetection_succeedsOn80PercentOfImages() throws {
@@ -28,13 +30,15 @@ final class LivenessDetectionTests: BaseTest {
         var failCount: Float = 0
         let imageURLs = try self.imageURLs(types: [.moire, .spoofDevice])
         for (url, positive) in imageURLs {
-            let moireConfidence = try self.moireDetector.detectMoireInImage(self.cgImage(at: url))
-            let spoofDeviceConfidence = try self.spoofDeviceDetector.detectSpoofDevicesInImage(self.image(at: url)).sorted(by: { $0.confidence > $1.confidence }).first?.confidence ?? 0.0
+            let image = try self.image(at: url)
+            let moireConfidence = try self.moireDetector.detectMoireInImage(image)
+            let spoofDeviceConfidence = try self.spoofDeviceDetector.detectSpoofDevicesInImage(image).sorted(by: { $0.confidence > $1.confidence }).first?.confidence ?? 0.0
+            let spoofConfidence = try self.spoofDetector.detectSpoofInImage(image)
             let success: Bool
             if positive {
-                success = moireConfidence >= threshold || spoofDeviceConfidence >= threshold
+                success = moireConfidence >= threshold || spoofDeviceConfidence >= threshold || spoofConfidence >= threshold
             } else {
-                success = moireConfidence < threshold && spoofDeviceConfidence < threshold
+                success = moireConfidence < threshold && spoofDeviceConfidence < threshold && spoofConfidence < threshold
             }
             let prefix = positive ? "positive" : "negative"
             if !success {
@@ -96,10 +100,12 @@ final class LivenessDetectionTests: BaseTest {
             defer {
                 UIGraphicsEndImageContext()
             }
-            if let cgImage = image.cgImage {
-                let confidence = try self.moireDetector.detectMoireInImage(cgImage)
-                self.attributedString(String(format: "Moire: %.03f", confidence), colour: .black).draw(at: CGPoint(x: padding, y: imageRect.maxY - addedHeight + padding))
-            }
+            let spoofConfidence = try self.spoofDetector.detectSpoofInImage(image)
+            let spoofConfidenceString = self.attributedString(String(format: "Spoof: %.03f", spoofConfidence), colour: .black)
+            let stringSize = spoofConfidenceString.size()
+            spoofConfidenceString.draw(at: CGPoint(x: imageRect.maxX - stringSize.width - padding, y: imageRect.maxY - addedHeight + padding))
+            let confidence = try self.moireDetector.detectMoireInImage(image)
+            self.attributedString(String(format: "Moire: %.03f", confidence), colour: .black).draw(at: CGPoint(x: padding, y: imageRect.maxY - addedHeight + padding))
             if let annotatedImage = UIGraphicsGetImageFromCurrentImageContext() {
                 guard let imageData = annotatedImage.jpegData(compressionQuality: 0.9) else {
                     XCTFail("Failed to encode image to JPEG")

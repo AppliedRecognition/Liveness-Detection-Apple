@@ -34,7 +34,7 @@ final class MoireDetectorTest: BaseTest {
         let maxFailRatio: Float = 0.2
         var detectionCount: Float = 0
         var failCount: Float = 0
-        try withEachCGImage(types: [.moire]) { (image, url, positive) in
+        try withEachImage(types: [.moire]) { (image, url, positive) in
             let score = try self.moireDetector.detectMoireInImage(image)
             let prefix = positive ? "positive" : "negative"
             if (positive && score >= threshold) || (!positive && score < threshold) {
@@ -89,7 +89,7 @@ final class MoireDetectorTest: BaseTest {
     }
     
     func test_measureMoireDetectionSpeed() throws {
-        let image = try self.firstCGImage(type: .moire, positive: true)
+        let image = try self.firstImage(type: .moire, positive: true)
         self.measure {
             _ = try! self.moireDetector.detectMoireInImage(image)
         }
