@@ -60,6 +60,31 @@ public class MoireDetector {
         return prediction[0].floatValue
     }
     
+    /// Detect moire pattern interference artifacts in image
+    /// - Parameter image: Image
+    /// - Returns: Confidence score between `0.0` and `1.0` where `0` means 100% confidence that the image
+    /// does not contain moire artifacts and `1` means 100% confidence that it does.
+    /// - Since: 1.1.0
+    public func detectMoireInImage(_ image: UIImage) throws -> Float {
+        guard let cgImage: CGImage = self.cgImageFromUIImage(image) else {
+            throw ImageProcessingError.cgImageConversionError
+        }
+        let rotatedImage = try self.rotateCGImage(cgImage, orientation: image.imageOrientation)
+        return try self.detectMoireInImage(rotatedImage)
+    }
+    
+    func cgImageFromUIImage(_ uiImage: UIImage) -> CGImage? {
+        if let cg = uiImage.cgImage {
+            return cg
+        } else if let ci = uiImage.ciImage {
+            let context = CIContext(options: nil)
+            if let cg = context.createCGImage(ci, from: ci.extent) {
+                return cg
+            }
+        }
+        return nil
+    }
+    
     func predictionFromFeatureProvider(_ featureProvider: MLDictionaryFeatureProvider) throws -> MLMultiArray {
         guard let prediction = try self.model.prediction(from: featureProvider).featureValue(for: "Identity")?.multiArrayValue else {
             throw MoireDetectorError.predictionFailure
@@ -93,6 +118,80 @@ public class MoireDetector {
         let orientation: CGImagePropertyOrientation = resizedImage.width > resizedImage.height ? .up : .left
         let grayscale = try self.grayscaleFromCGImage(resizedImage, orientation: orientation)
         return grayscale
+    }
+    
+    func rotateCGImage(_ cgImage: CGImage, orientation: UIImage.Orientation) throws -> CGImage {
+        let rotation: UInt8
+        switch orientation {
+        case .right, .rightMirrored:
+            rotation = 3
+        case .left, .leftMirrored:
+            rotation = 1
+        case .down, .downMirrored:
+            rotation = 2
+        default:
+            return cgImage
+        }
+        let outWidth: UInt
+        let outHeight: UInt
+        // Flip width and height if the image is rotated 90 or 270 degrees
+        if rotation == 1 || rotation == 3 {
+            outWidth = UInt(cgImage.height)
+            outHeight = UInt(cgImage.width)
+        } else {
+            outWidth = UInt(cgImage.width)
+            outHeight = UInt(cgImage.height)
+        }
+        var imageBuffer = try self.imageBufferFromCGImage(cgImage)
+        defer {
+            if #available(iOS 13, *) {
+                imageBuffer.free()
+            } else {
+                imageBuffer.data?.deallocate()
+            }
+        }
+        // Set the bytes per row for the rotated image
+        let outBytesPerRow: Int = Int(outWidth) * cgImage.bitsPerPixel / 8
+        // Calculate the size of the rotated image buffer
+        let destSize = outBytesPerRow * Int(outHeight) * MemoryLayout<UInt8>.size
+        let rotatedData = UnsafeMutablePointer<UInt8>.allocate(capacity: destSize)
+        var outBuffer = vImage_Buffer(data: rotatedData, height: outHeight, width: outWidth, rowBytes: outBytesPerRow)
+        defer {
+            if #available(iOS 13, *) {
+                outBuffer.free()
+            } else {
+                rotatedData.deallocate()
+            }
+        }
+        if cgImage.bitsPerPixel == 32 {
+            var backgroundColour: UInt8 = 0
+            vImageRotate90_ARGB8888(&imageBuffer, &outBuffer, rotation, &backgroundColour, numericCast(kvImageNoFlags))
+        } else if cgImage.bitsPerPixel == 8 {
+            vImageRotate90_Planar8(&imageBuffer, &outBuffer, rotation, 0, numericCast(kvImageNoFlags))
+        } else {
+            return cgImage
+        }
+        let colourSpace: Unmanaged<CGColorSpace> = cgImage.colorSpace != nil ? Unmanaged.passRetained(cgImage.colorSpace!) : Unmanaged.passRetained(CGColorSpaceCreateDeviceRGB())
+        let format = vImage_CGImageFormat(bitsPerComponent: UInt32(cgImage.bitsPerComponent), bitsPerPixel: UInt32(cgImage.bitsPerPixel), colorSpace: colourSpace, bitmapInfo: cgImage.bitmapInfo, version: 0, decode: nil, renderingIntent: .defaultIntent)
+        return try outBuffer.createCGImage(format: format)
+    }
+    
+    func imageBufferFromCGImage(_ cgImage: CGImage) throws -> vImage_Buffer {
+        var colourSpace: Unmanaged<CGColorSpace> = cgImage.colorSpace != nil ? Unmanaged.passRetained(cgImage.colorSpace!) : Unmanaged.passRetained(CGColorSpaceCreateDeviceRGB())
+        var format = vImage_CGImageFormat(bitsPerComponent: UInt32(cgImage.bitsPerComponent), bitsPerPixel: UInt32(cgImage.bitsPerPixel), colorSpace: colourSpace, bitmapInfo: cgImage.bitmapInfo, version: 0, decode: nil, renderingIntent: .defaultIntent)
+        let originalLength = cgImage.height * cgImage.bytesPerRow
+        let originalBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: originalLength)
+        var originalBuffer = vImage_Buffer(data: originalBytes, height:vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.bytesPerRow)
+        let error = vImageBuffer_InitWithCGImage(&originalBuffer, &format, nil, cgImage, numericCast(kvImageNoAllocate))
+        guard error == kvImageNoError else {
+            if #available(iOS 13, *) {
+                originalBuffer.free()
+            } else {
+                originalBytes.deallocate()
+            }
+            throw ImageProcessingError.cgImageFromBufferError
+        }
+        return originalBuffer
     }
     
     func grayscaleFromCGImage(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) throws -> Array2D<UInt8> {
