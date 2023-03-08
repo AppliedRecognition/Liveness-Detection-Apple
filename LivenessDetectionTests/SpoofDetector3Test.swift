@@ -7,6 +7,8 @@
 
 import XCTest
 import MobileCoreServices
+import VerIDCore
+import VerIDSDKIdentity
 @testable import LivenessDetection
 
 final class SpoofDetector3Test: BaseTest {
@@ -19,30 +21,39 @@ final class SpoofDetector3Test: BaseTest {
     }
     
     func test_detectSpoofs_succeedsOn80PercentOfImages() throws {
-        var fpCount: Float = 0
-        var fnCount: Float = 0
-        var positiveCount: Float = 0
-        var negativeCount: Float = 0
-        let threshold: Float = 0.5
-        let maxFailRate: Float = 0.2
+        let maxFailRatio: Float = 0.2
+        let failRatio = try self.failRatioOfDetectionOnEachImage(self.spoofDetector, detectFace: false)
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
+    func test_detectSpoofsWithROI_succeedsOn80PercentOfImages() throws {
+        let maxFailRatio: Float = 0.2
+        let failRatio = try self.failRatioOfDetectionOnEachImage(self.spoofDetector, detectFace: true)
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
+    func test_detectSpoofsOnVariouslyCroppedImages_attachCSV() throws {
+        let verID = try self.createVerID()
+        var csv: String = "\"Image\",\"Positive\",\"Score\",\"Score (cropped to face)\",\"Score (cropped to eye region)\""
         try withEachImage(types: [.spoofDevice,.moire]) { (image, url, positive) in
             let confidence = try self.spoofDetector.detectSpoofInImage(image)
-            if positive {
-                positiveCount += 1
-                if confidence < threshold {
-                    fnCount += 1
-                }
+            csv.append(String(format: "\n\"%@\",%@,%.03f,", url.lastPathComponent, positive ? "1" : "0", confidence))
+            if let face = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first {
+                let faceImage = self.image(image, croppedToFace: face)
+                let eyeRegionImage = self.image(image, croppedToEyeRegionsOfFace: face)
+                let faceCropConfidence = try self.spoofDetector.detectSpoofInImage(faceImage)
+                let eyeRegionCropConfidence = try self.spoofDetector.detectSpoofInImage(eyeRegionImage)
+                csv.append(String(format: "%.03f,%.03f", faceCropConfidence, eyeRegionCropConfidence))
             } else {
-                negativeCount += 1
-                if confidence >= threshold {
-                    fpCount += 1
-                }
+                csv.append("\"n/a\",\"n/a\"")
             }
         }
-        NSLog("False positive rate = %.02f%%", fpCount / negativeCount * 100)
-        NSLog("False negative rate = %.02f%%", fnCount / positiveCount * 100)
-        XCTAssertLessThanOrEqual(fpCount / negativeCount, maxFailRate, String(format: "False positive rate is less than %.0f%%", maxFailRate * 100))
-        XCTAssertLessThanOrEqual(fnCount / positiveCount, maxFailRate, String(format: "False negative rate is less than %.0f%%", maxFailRate * 100))
+        let attachment = XCTAttachment(string: csv)
+        attachment.lifetime = .keepAlways
+        attachment.name = "Spoof detector.csv"
+        self.add(attachment)
     }
     
     func test_detectSpoofs_attachCSV() throws {

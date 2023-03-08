@@ -12,7 +12,9 @@ import Vision
 import Accelerate
 import AVFoundation
 
-public class SpoofDetector3 {
+/// Generic spoof detector
+/// - Since: 1.1.0
+public class SpoofDetector3: SpoofDetector {
     
     let model: MLModel
     let width: Int = 224
@@ -21,25 +23,51 @@ public class SpoofDetector3 {
     lazy var strides = [width * height * 3, width * height, width, 1] as [NSNumber]
     
     @available(iOS 16, macOS 13, macCatalyst 16, *)
+    /// Constructor
+    /// - Parameter modelURL: Model file URL
     public convenience init(modelURL: URL) async throws {
         let compiledModelURL = try await MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
     /// Constructor
     /// - Parameter modelURL: Model file URL
     public convenience init(modelURL: URL) throws {
         let compiledModelURL = try MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL) throws {
+    private init(compiledModelURL: URL, identifier: String) throws {
         self.model = try MLModel(contentsOf: compiledModelURL)
+        self.identifier = identifier
     }
     
-    public func detectSpoofInImage(_ image: UIImage) throws -> Float {
-        let prediction = try self.model.prediction(from: self.featureProvider(image))
+    // MARK: - SpoofDetector
+    
+    public let identifier: String
+    
+    public var confidenceThreshold: Float = 0.3
+    
+    public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
+        let img: UIImage
+        if let crop = roi {
+            img = self.cropImage(image, toRect: crop)
+        } else {
+            img = image
+        }
+        let prediction = try self.model.prediction(from: self.featureProvider(img))
         return try self.softmaxFromFeatureProvider(prediction)[1]
+    }
+    
+    // MARK: -
+    
+    func cropImage(_ image: UIImage, toRect rect: CGRect) -> UIImage {
+        UIGraphicsBeginImageContext(rect.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        image.draw(at: CGPoint(x: 0-rect.minX, y: 0-rect.minY))
+        return UIGraphicsGetImageFromCurrentImageContext()!
     }
     
     func featureProvider(_ image: UIImage) throws -> MLDictionaryFeatureProvider {

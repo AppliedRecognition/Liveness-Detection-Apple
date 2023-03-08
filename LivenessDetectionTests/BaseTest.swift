@@ -7,6 +7,8 @@
 
 import XCTest
 import UIKit
+import VerIDCore
+import VerIDSDKIdentity
 @testable import LivenessDetection
 
 class BaseTest: XCTestCase {
@@ -155,6 +157,52 @@ class BaseTest: XCTestCase {
     
     func createSpoofDetector() throws -> SpoofDetector3 {
         return try SpoofDetector3(modelURL: self.spoofDetectorModelURL)
+    }
+    
+    func createVerID() throws -> VerID {
+        let pwd = "78ccf0dc-7dda-4dd7-8fe0-f5e4e85d3f9e"
+        guard let url = Bundle(for: type(of: self)).url(forResource: "Ver-ID identity", withExtension: "p12") else {
+            throw NSError()
+        }
+        let identity = try VerIDIdentity(url: url, password: pwd)
+        let verIDFactory = VerIDFactory(identity: identity)
+        return try verIDFactory.createVerIDSync()
+    }
+    
+    func image(_ image: UIImage, croppedToEyeRegionsOfFace face: Face) -> UIImage {
+        let distanceBetweenEyes = hypot(face.rightEye.y - face.leftEye.y, face.rightEye.x - face.leftEye.x)
+        let cropRect = CGRect(x: face.leftEye.x - distanceBetweenEyes * 0.75, y: min(face.leftEye.y, face.rightEye.y) - distanceBetweenEyes * 0.5, width: distanceBetweenEyes * 2.5, height: distanceBetweenEyes)
+        UIGraphicsBeginImageContext(cropRect.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        image.draw(at: CGPoint(x: 0-cropRect.minX, y: 0-cropRect.minY))
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    }
+    
+    func image(_ image: UIImage, croppedToFace face: Face) -> UIImage {
+        UIGraphicsBeginImageContext(face.bounds.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        image.draw(at: CGPoint(x: 0-face.bounds.minX, y: 0-face.bounds.minY))
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    }
+    
+    func failRatioOfDetectionOnEachImage(_ detector: SpoofDetector, detectFace: Bool) throws -> Float {
+        var detectionCount: Float = 0
+        var failCount: Float = 0
+        let verID: VerID? = detectFace ? try self.createVerID() : nil
+        try withEachImage(types: [.spoofDevice]) { (image, url, positive) in
+            let roi = try verID?.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let isSpoof = try detector.isSpoofedImage(image, regionOfInterest: roi)
+            let success = (positive && isSpoof) || (!positive && !isSpoof)
+            detectionCount += 1
+            if !success {
+                failCount += 1
+            }
+        }
+        return failCount / detectionCount
     }
 }
 

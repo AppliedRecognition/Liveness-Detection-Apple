@@ -14,7 +14,7 @@ import Accelerate
 ///
 /// Detects moire pattern artifacts in image
 /// - Since: 1.0.0
-public class MoireDetector {
+public class MoireDetector: SpoofDetector {
     
     let imageLongerSideLength: Int = 1000
     let imageShorterSideLength: Int = 750
@@ -27,20 +27,39 @@ public class MoireDetector {
     @available(iOS 16, macOS 13, macCatalyst 16, *)
     public convenience init(modelURL: URL) async throws {
         let compiledModelURL = try await MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
     /// Constructor
     /// - Parameter modelURL: Model file URL
     public convenience init(modelURL: URL) throws {
         let compiledModelURL = try MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL) throws {
+    private init(compiledModelURL: URL, identifier: String) throws {
         self.waveletDecomposition = WaveletDecomposition()
         self.model = try MLModel(contentsOf: compiledModelURL)
+        self.identifier = identifier
     }
+    
+    // MARK: - SpoofDetector
+    
+    public let identifier: String
+    
+    public var confidenceThreshold: Float = 0.3
+    
+    public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
+        if #available(iOS 13, *) {
+            return try self.detectMoireInImage(image)
+        } else if let cgImage = image.cgImage {
+            return try self.detectMoireInImage(cgImage)
+        } else {
+            throw ImageProcessingError.cgImageConversionError
+        }
+    }
+    
+    // MARK: -
     
     /// Detect moire pattern interference artifacts in image
     /// - Parameter image: Image
@@ -65,6 +84,7 @@ public class MoireDetector {
     /// - Returns: Confidence score between `0.0` and `1.0` where `0` means 100% confidence that the image
     /// does not contain moire artifacts and `1` means 100% confidence that it does.
     /// - Since: 1.1.0
+    @available(iOS 13, *)
     public func detectMoireInImage(_ image: UIImage) throws -> Float {
         guard let cgImage: CGImage = self.cgImageFromUIImage(image) else {
             throw ImageProcessingError.cgImageConversionError
@@ -120,6 +140,7 @@ public class MoireDetector {
         return grayscale
     }
     
+    @available(iOS 13, *)
     func rotateCGImage(_ cgImage: CGImage, orientation: UIImage.Orientation) throws -> CGImage {
         let rotation: UInt8
         switch orientation {
@@ -144,11 +165,7 @@ public class MoireDetector {
         }
         var imageBuffer = try self.imageBufferFromCGImage(cgImage)
         defer {
-            if #available(iOS 13, *) {
-                imageBuffer.free()
-            } else {
-                imageBuffer.data?.deallocate()
-            }
+            imageBuffer.free()
         }
         // Set the bytes per row for the rotated image
         let outBytesPerRow: Int = Int(outWidth) * cgImage.bitsPerPixel / 8
@@ -157,11 +174,7 @@ public class MoireDetector {
         let rotatedData = UnsafeMutablePointer<UInt8>.allocate(capacity: destSize)
         var outBuffer = vImage_Buffer(data: rotatedData, height: outHeight, width: outWidth, rowBytes: outBytesPerRow)
         defer {
-            if #available(iOS 13, *) {
-                outBuffer.free()
-            } else {
-                rotatedData.deallocate()
-            }
+            outBuffer.free()
         }
         if cgImage.bitsPerPixel == 32 {
             var backgroundColour: UInt8 = 0

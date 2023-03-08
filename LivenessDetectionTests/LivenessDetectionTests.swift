@@ -8,6 +8,7 @@
 import XCTest
 import UIKit
 import ZIPFoundation
+import VerIDCore
 @testable import LivenessDetection
 
 final class LivenessDetectionTests: BaseTest {
@@ -15,39 +16,46 @@ final class LivenessDetectionTests: BaseTest {
     var spoofDeviceDetector: SpoofDeviceDetector!
     var moireDetector: MoireDetector!
     var spoofDetector: SpoofDetector3!
+    var spoofDetection: SpoofDetection!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         self.spoofDeviceDetector = try createSpoofDeviceDetector()
         self.moireDetector = try createMoireDetector()
         self.spoofDetector = try createSpoofDetector()
+        self.spoofDetection = SpoofDetection(self.spoofDeviceDetector, self.moireDetector, self.spoofDetector)
     }
     
     func test_livenessDetection_succeedsOn80PercentOfImages() throws {
-        let threshold: Float = 0.5
         let maxFailRatio: Float = 0.2
         var detectionCount: Float = 0
         var failCount: Float = 0
-        let imageURLs = try self.imageURLs(types: [.moire, .spoofDevice])
-        for (url, positive) in imageURLs {
-            let image = try self.image(at: url)
-            let moireConfidence = try self.moireDetector.detectMoireInImage(image)
-            let spoofDeviceConfidence = try self.spoofDeviceDetector.detectSpoofDevicesInImage(image).sorted(by: { $0.confidence > $1.confidence }).first?.confidence ?? 0.0
-            let spoofConfidence = try self.spoofDetector.detectSpoofInImage(image)
-            let success: Bool
-            if positive {
-                success = moireConfidence >= threshold || spoofDeviceConfidence >= threshold || spoofConfidence >= threshold
-            } else {
-                success = moireConfidence < threshold && spoofDeviceConfidence < threshold && spoofConfidence < threshold
-            }
-            let prefix = positive ? "positive" : "negative"
+        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
+            let isSpoof = try self.spoofDetection.isSpoofedImage(image)
+            let success = (positive && isSpoof) || (!positive && !isSpoof)
+            detectionCount += 1
             if !success {
                 failCount += 1
-                NSLog("%@/%@ failed", prefix, url.lastPathComponent)
-            } else {
-                NSLog("%@/%@ succeeded", prefix, url.lastPathComponent)
             }
+        }
+        let failRatio = failCount / detectionCount
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
+    func test_livenessDetectionWithROI_succeedsOn80PercentOfImages() throws {
+        let maxFailRatio: Float = 0.2
+        var detectionCount: Float = 0
+        var failCount: Float = 0
+        let verID = try self.createVerID()
+        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
+            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
+            let success = (positive && isSpoof) || (!positive && !isSpoof)
             detectionCount += 1
+            if !success {
+                failCount += 1
+            }
         }
         let failRatio = failCount / detectionCount
         NSLog("Fail ratio: %.02f%%", failRatio * 100)
