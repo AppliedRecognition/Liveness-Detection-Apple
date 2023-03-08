@@ -18,8 +18,16 @@ public class SpoofDetection {
     
     /// Initializer
     /// - Parameter spoofDetector: Spoof detectors to use for liveness detection
+    /// - Since: 1.1.0
     public init(_ spoofDetector: SpoofDetector...) {
         self.spoofDetectors = spoofDetector
+    }
+    
+    /// Initializer
+    /// - Parameter spoofDetectors: Spoof detectors to use for liveness detection
+    /// - Since: 1.1.0
+    public init(_ spoofDetectors: [SpoofDetector]) {
+        self.spoofDetectors = spoofDetectors
     }
     
     /// Detect a spoof in image
