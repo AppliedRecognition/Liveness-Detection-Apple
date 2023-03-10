@@ -14,7 +14,7 @@ import CoreML
 ///
 /// Detect spoof devices like smartphones, tablets or photographs
 /// - Since: 1.0.0
-public class SpoofDeviceDetector {
+public class SpoofDeviceDetector: SpoofDetector {
     
     /// If detected spoof device bounding box side exceeds the corresponding side of the image
     /// multiplied by this ratio add `largeBoxScoreAdjustment` to the score
@@ -64,7 +64,7 @@ public class SpoofDeviceDetector {
     @available(iOS 16, macOS 13, macCatalyst 16, *)
     public convenience init(modelURL: URL) async throws {
         let compiledModelURL = try await MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
     /// Constructor
@@ -72,13 +72,31 @@ public class SpoofDeviceDetector {
     /// - Since: 1.0.0
     public convenience init(modelURL: URL) throws {
         let compiledModelURL = try MLModel.compileModel(at: modelURL)
-        try self.init(compiledModelURL: compiledModelURL)
+        try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL) throws {
+    private init(compiledModelURL: URL, identifier: String) throws {
         let spoofDetector: MLModel = try MLModel(contentsOf: compiledModelURL)
         self.model = try VNCoreMLModel(for: spoofDetector)
+        self.identifier = identifier
     }
+    
+    // MARK: - SpoofDetector
+    
+    public let identifier: String
+    
+    public var confidenceThreshold: Float = 0.3
+    
+    public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect?) throws -> Float {
+        var spoofDevices = try self.detectSpoofDevicesInImage(image)
+        if let centreX = roi?.midX, let centreY = roi?.midY {
+            let roiCentre = CGPoint(x: centreX, y: centreY)
+            spoofDevices = spoofDevices.filter({ $0.boundingBox.contains(roiCentre) })
+        }
+        return spoofDevices.max(by: { $0.confidence < $1.confidence })?.confidence ?? 0
+    }
+    
+    // MARK: -
     
     /// Detect spoof devices in sample buffer
     /// - Parameters:

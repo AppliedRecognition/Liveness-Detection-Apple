@@ -30,22 +30,8 @@ final class MoireDetectorTest: BaseTest {
     }
     
     func test_detectMoireInImages_succeedsOn80PercentOfImages() throws {
-        let threshold: Float = 0.5
         let maxFailRatio: Float = 0.2
-        var detectionCount: Float = 0
-        var failCount: Float = 0
-        try withEachCGImage(types: [.moire]) { (image, url, positive) in
-            let score = try self.moireDetector.detectMoireInImage(image)
-            let prefix = positive ? "positive" : "negative"
-            if (positive && score >= threshold) || (!positive && score < threshold) {
-                NSLog("%@/%@ succeeded: moire confidence %.04f", prefix, url.lastPathComponent, score)
-            } else {
-                NSLog("%@/%@ failed: moire confidence %.04f", prefix, url.lastPathComponent, score)
-                failCount += 1
-            }
-            detectionCount += 1
-        }
-        let failRatio = failCount / detectionCount
+        let failRatio = try self.failRatioOfDetectionOnEachImage(self.moireDetector, detectFace: false)
         NSLog("Fail ratio: %.02f%%", failRatio * 100)
         XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
     }
@@ -89,7 +75,7 @@ final class MoireDetectorTest: BaseTest {
     }
     
     func test_measureMoireDetectionSpeed() throws {
-        let image = try self.firstCGImage(type: .moire, positive: true)
+        let image = try self.firstImage(type: .moire, positive: true)
         self.measure {
             _ = try! self.moireDetector.detectMoireInImage(image)
         }

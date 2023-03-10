@@ -42,6 +42,12 @@
                <Test
                   Identifier = "LivenessDetectionTests/test_livenessDetection_attachAnnotatedImages()">
                </Test>
+               <Test
+                  Identifier = "SpoofDetector3Test/test_detectSpoofsOnVariouslyCroppedImages_attachCSV()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDetector3Test/test_detectSpoofs_attachCSV()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

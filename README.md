@@ -60,6 +60,23 @@ func detectSpoofDevicesInImage(_ image: UIImage) -> [DetectedSpoofDevice]? {
 }
 ```
 
+### Spoof detection using detector 3
+
+```swift
+func detectSpoofInImage(_ image: UIImage) -> Float? {
+    // Get the model URL from your app's resource bundle
+    guard let spoofDetectorModelURL = Bundle.main.url(forResource: "SpoofDetector3Model", withExtension: "mlmodel") else {
+        return nil
+    }
+    // Load the spoof detector
+    guard let spoofDetector = try? SpoofDetector3(modelURL: spoofDetectorModelURL) else {
+        return nil
+    }
+    // Run the spoof detection
+    return try? spoofDetector.detectSpoofInImage(image)
+}
+```
+
 ### Note
 Loading/compiling the model file can be somewhat expensive. You will want to construct the detectors on a background thread. Unless you're only detecting liveness in one image, you will most likely want to construct the detectors once instead of creating a new instance for each detection.
 
@@ -83,7 +100,13 @@ class LivenessDetection {
                 }
                 // Load the spoof device detector
                 let spoofDeviceDetector = try? SpoofDeviceDetector(modelURL: spoofDeviceDetectorModelURL)
-                completion(.success(LivenessDetection(moireDetector: moireDetector, spoofDeviceDetector: spoofDeviceDetector))
+                // Get the model URL from your app's resource bundle
+                guard let spoofDetector3ModelURL = Bundle.main.url(forResource: "SpoofDetector3Model", withExtension: "mlmodel") else {
+                    throw LivenessDetectionError.failedToFindSpoofDetector3ModelFile
+                }
+                // Load spoof detector 3
+                let spoofDetector3 = try? SpoofDetector3(modelURL: spoofDetector3ModelURL)
+                completion(.success(LivenessDetection(moireDetector: moireDetector, spoofDeviceDetector: spoofDeviceDetector, spoofDetector3: spoofDetector3))
             } catch {
                 completion(.failure(error))
             }
@@ -92,11 +115,13 @@ class LivenessDetection {
     
     let moireDetector: MoireDetector
     let spoofDeviceDetector: SpoofDeviceDetector
+    let spoofDetector3: SpoofDetector3
     let confidenceThreshold: Float = 0.5
     
-    private init(moireDetector: MoireDetector, spoofDeviceDetector: SpoofDeviceDetector) {
+    private init(moireDetector: MoireDetector, spoofDeviceDetector: SpoofDeviceDetector, spoofDetector3: SpoofDetector3) {
         self.moireDetector = moireDetector
         self.spoofDeviceDetector = spoofDeviceDetector
+        self.spoofDetector3 = spoofDetector3
     }
     
     func detectLivenessInImage(_ image: UIImage, completion: Result<Boolean,Error>) {
@@ -114,6 +139,10 @@ class LivenessDetection {
                     let moireConfidence = try self.moireDetector.detectMoireInImage(cgImage)
                     passed = moireConfidence > self.confidenceThreshold
                 }
+                if passed {
+                    let spoofConfidence = try self.spoofDetector3.detectSpoofInImage(image)
+                    passed = spoofConfidence > self.confidenceThreshold
+                }
                 completion(.success(passed))
             } catch {
                 completion(.failure(error))
@@ -125,6 +154,7 @@ class LivenessDetection {
 enum LivenessDetectionError: Error {
     case failedToFindMoireDetectorModelFile
     case failedToFindSpoofDeviceDetectorModelFile
+    case failedToFindSpoofDetector3ModelFile
     case failedToCreateCGImageFromUIImage
 }
 ```
