@@ -18,7 +18,7 @@ public protocol SpoofDetector: AnyObject {
     
     /// Confidence threshold used to filter results by the `isSpoofedImage(:regionOfInterest:)` method
     /// - Since: 1.1.0
-    var confidenceThreshold: Float { get }
+    var confidenceThreshold: Float { get set }
     
     /// Detect spoof in image
     /// - Parameters:
