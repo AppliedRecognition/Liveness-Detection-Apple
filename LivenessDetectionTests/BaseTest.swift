@@ -204,6 +204,30 @@ class BaseTest: XCTestCase {
         }
         return failCount / detectionCount
     }
+    
+    func falsePositiveAndNegativeRatiosOnEachImage(detectors: [SpoofDetector], detectFace: Bool) throws -> (Float, Float) {
+        let verID: VerID? = detectFace ? try self.createVerID() : nil
+        var fpCount: Float = 0
+        var fnCount: Float = 0
+        var totalCount: Float = 0
+        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
+            totalCount += 1
+            let roi = try verID?.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            var isSpoof: Bool = false
+            for detector in detectors {
+                if try detector.isSpoofedImage(image, regionOfInterest: roi) {
+                    isSpoof = true
+                    break
+                }
+            }
+            if positive && !isSpoof {
+                fnCount += 1
+            } else if !positive && isSpoof {
+                fpCount += 1
+            }
+        }
+        return (fpCount / totalCount, fnCount / totalCount)
+    }
 }
 
 enum LivenessDetectionType: String, Decodable {

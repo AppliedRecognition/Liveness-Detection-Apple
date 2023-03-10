@@ -62,6 +62,72 @@ final class LivenessDetectionTests: BaseTest {
         XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
     }
     
+    func test_falsePositiveRateWithROI_succeedsOn80PercentOfImages() throws {
+        let maxFailRatio: Float = 0.2
+        var detectionCount: Float = 0
+        var failCount: Float = 0
+        let verID = try self.createVerID()
+        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
+            if positive {
+                return
+            }
+            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
+            detectionCount += 1
+            if isSpoof {
+                failCount += 1
+            }
+        }
+        let failRatio = failCount / detectionCount
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
+    func test_falseNegativeRateWithROI_succeedsOn80PercentOfImages() throws {
+        let maxFailRatio: Float = 0.2
+        var detectionCount: Float = 0
+        var failCount: Float = 0
+        let verID = try self.createVerID()
+        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
+            if !positive {
+                return
+            }
+            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
+            detectionCount += 1
+            if !isSpoof {
+                failCount += 1
+            }
+        }
+        let failRatio = failCount / detectionCount
+        NSLog("Fail ratio: %.02f%%", failRatio * 100)
+        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
+    }
+    
+    func test_falseRatesOnAllModelsWithROI() throws {
+        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector, self.spoofDetector], detectFace: true)
+        NSLog("False positive ratio (all models): %.02f%%", fpRatio * 100)
+        NSLog("False negative ratio (all models): %.02f%%", fnRatio * 100)
+    }
+    
+    func test_falseRatesWithoutSpoof3WithROI() throws {
+        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector], detectFace: true)
+        NSLog("False positive ratio (without spoof3): %.02f%%", fpRatio * 100)
+        NSLog("False negative ratio (without spoof3): %.02f%%", fnRatio * 100)
+    }
+    
+    func test_falseRatesOnAllModels() throws {
+        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector, self.spoofDetector], detectFace: false)
+        NSLog("False positive ratio (all models): %.02f%%", fpRatio * 100)
+        NSLog("False negative ratio (all models): %.02f%%", fnRatio * 100)
+    }
+    
+    func test_falseRatesWithoutSpoof3() throws {
+        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector], detectFace: false)
+        NSLog("False positive ratio (without spoof3): %.02f%%", fpRatio * 100)
+        NSLog("False negative ratio (without spoof3): %.02f%%", fnRatio * 100)
+    }
+    
     func test_livenessDetection_attachAnnotatedImages() throws {
         let colours: [CGColor] = [UIColor.green.cgColor, UIColor.red.cgColor, UIColor.purple.cgColor, UIColor.cyan.cgColor]
         let archiveURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("zip")
