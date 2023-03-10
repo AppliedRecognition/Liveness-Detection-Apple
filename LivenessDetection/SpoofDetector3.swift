@@ -21,6 +21,7 @@ public class SpoofDetector3: SpoofDetector {
     let height: Int = 224
     lazy var shape = [1, 3, width, height] as [NSNumber]
     lazy var strides = [width * height * 3, width * height, width, 1] as [NSNumber]
+    var imageResizing: Resizing = .aspectFill
     
     @available(iOS 16, macOS 13, macCatalyst 16, *)
     /// Constructor
@@ -77,13 +78,21 @@ public class SpoofDetector3: SpoofDetector {
     
     func scaleImage(_ image: UIImage) throws -> CGImage {
         let destSize = CGSize(width: width, height: height)
-        var rect = AVMakeRect(aspectRatio: destSize, insideRect: CGRect(origin: .zero, size: image.size))
-        let scale = destSize.width / rect.width
         UIGraphicsBeginImageContext(destSize)
         defer {
             UIGraphicsEndImageContext()
         }
-        rect = CGRect(x: 0-rect.minX*scale, y: 0-rect.minY*scale, width: image.size.width*scale, height: image.size.height*scale)
+        var rect: CGRect
+        switch self.imageResizing {
+        case .aspectFill:
+            rect = AVMakeRect(aspectRatio: destSize, insideRect: CGRect(origin: .zero, size: image.size))
+            let scale = destSize.width / rect.width
+            rect = CGRect(x: 0-rect.minX*scale, y: 0-rect.minY*scale, width: image.size.width*scale, height: image.size.height*scale)
+        case .aspectFit:
+            rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: destSize))
+        case .stretch:
+            rect = CGRect(origin: .zero, size: destSize)
+        }
         image.draw(in: rect)
         guard let cgImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
             throw NSError()
@@ -96,6 +105,10 @@ public class SpoofDetector3: SpoofDetector {
             throw NSError()
         }
         let vec: [Float] = [multiArray[0].floatValue, multiArray[1].floatValue]
+        return self.softmax(vec)
+    }
+    
+    func softmax(_ vec: [Float]) -> [Float] {
         return vec.map({
             exp($0) / vec.map({ exp($0) }).reduce(0, +)
         })
@@ -168,4 +181,8 @@ public class SpoofDetector3: SpoofDetector {
         }
         return try MLMultiArray(dataPointer: input, shape: shape, dataType: .float32, strides: strides)
     }
+}
+
+public enum Resizing {
+    case stretch, aspectFit, aspectFill
 }
