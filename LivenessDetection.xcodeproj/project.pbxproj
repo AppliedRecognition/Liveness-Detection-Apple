@@ -12,10 +12,8 @@
 		3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991429B88319003AB87E /* SpoofDetector.swift */; };
 		3B41997629BA70DE003AB87E /* test_input.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997529BA70DC003AB87E /* test_input.json */; };
 		3B41997829BA8678003AB87E /* test_output.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997729BA8677003AB87E /* test_output.json */; };
-		3BADB096298D1DF4009F73C3 /* LivenessDetection.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB095298D1DF4009F73C3 /* LivenessDetection.docc */; };
 		3BADB09C298D1DF4009F73C3 /* LivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */; };
 		3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */; };
-		3BADB0A2298D1DF4009F73C3 /* LivenessDetection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BADB094298D1DF4009F73C3 /* LivenessDetection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3BADB0AC298D1E6E009F73C3 /* MoireDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */; };
 		3BADB0AE298D1EEB009F73C3 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AD298D1EEB009F73C3 /* Array2D.swift */; };
 		3BADB0B0298D1F2C009F73C3 /* WaveletDecomposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AF298D1F2C009F73C3 /* WaveletDecomposition.swift */; };
@@ -29,7 +27,6 @@
 		3BB2BCE0299FFB2A00CCEA18 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB2BCDF299FFB2A00CCEA18 /* ZIPFoundation */; };
 		3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */; };
 		3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */; };
-		E04767369048C97797800697 /* Pods_LivenessDetectionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3AC2FA253FC0C773EADFB2 /* Pods_LivenessDetectionTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		201879ED64FDD5332AFF6703 /* Pods-LivenessDetectionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetectionTests.release.xcconfig"; path = "Target Support Files/Pods-LivenessDetectionTests/Pods-LivenessDetectionTests.release.xcconfig"; sourceTree = "<group>"; };
-		3A3AC2FA253FC0C773EADFB2 /* Pods_LivenessDetectionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivenessDetectionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B41991029B78238003AB87E /* Ver-ID identity.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ver-ID identity.p12"; sourceTree = "<group>"; };
 		3B41991229B882B4003AB87E /* SpoofDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetection.swift; sourceTree = "<group>"; };
 		3B41991429B88319003AB87E /* SpoofDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector.swift; sourceTree = "<group>"; };
@@ -53,8 +48,6 @@
 		3BA86E572991769100006E0B /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		3BA86E592991908100006E0B /* LivenessDetection.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LivenessDetection.podspec; sourceTree = "<group>"; };
 		3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LivenessDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BADB094298D1DF4009F73C3 /* LivenessDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LivenessDetection.h; sourceTree = "<group>"; };
-		3BADB095298D1DF4009F73C3 /* LivenessDetection.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LivenessDetection.docc; sourceTree = "<group>"; };
 		3BADB09B298D1DF4009F73C3 /* LivenessDetectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivenessDetectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivenessDetectionTests.swift; sourceTree = "<group>"; };
 		3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireDetector.swift; sourceTree = "<group>"; };
@@ -69,7 +62,7 @@
 		3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDeviceDetectorTest.swift; sourceTree = "<group>"; };
 		3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3.swift; sourceTree = "<group>"; };
 		3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3Test.swift; sourceTree = "<group>"; };
-		5693976C08A37F31BE187960 /* Pods-LivenessDetectionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetectionTests.debug.xcconfig"; path = "Target Support Files/Pods-LivenessDetectionTests/Pods-LivenessDetectionTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3BF43A892A2A06F1007011D1 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +79,6 @@
 			files = (
 				3BADB09C298D1DF4009F73C3 /* LivenessDetection.framework in Frameworks */,
 				3BB2BCE0299FFB2A00CCEA18 /* ZIPFoundation in Frameworks */,
-				E04767369048C97797800697 /* Pods_LivenessDetectionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,13 +88,12 @@
 		3BADB087298D1DF3009F73C3 = {
 			isa = PBXGroup;
 			children = (
+				3BF43A892A2A06F1007011D1 /* Package.swift */,
 				3BA86E592991908100006E0B /* LivenessDetection.podspec */,
 				3BA86E572991769100006E0B /* build.sh */,
 				3BADB093298D1DF4009F73C3 /* LivenessDetection */,
 				3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */,
 				3BADB092298D1DF4009F73C3 /* Products */,
-				583C5E268C7BDEC3E972EC15 /* Pods */,
-				83057AF08C36D8BE4347A40D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,8 +109,6 @@
 		3BADB093298D1DF4009F73C3 /* LivenessDetection */ = {
 			isa = PBXGroup;
 			children = (
-				3BADB094298D1DF4009F73C3 /* LivenessDetection.h */,
-				3BADB095298D1DF4009F73C3 /* LivenessDetection.docc */,
 				3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */,
 				3BADB0AD298D1EEB009F73C3 /* Array2D.swift */,
 				3BADB0AF298D1F2C009F73C3 /* WaveletDecomposition.swift */,
@@ -130,7 +119,8 @@
 				3B41991229B882B4003AB87E /* SpoofDetection.swift */,
 				3B41991429B88319003AB87E /* SpoofDetector.swift */,
 			);
-			path = LivenessDetection;
+			name = LivenessDetection;
+			path = Sources/LivenessDetection;
 			sourceTree = "<group>";
 		};
 		3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */ = {
@@ -146,24 +136,8 @@
 				3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */,
 				3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */,
 			);
-			path = LivenessDetectionTests;
-			sourceTree = "<group>";
-		};
-		583C5E268C7BDEC3E972EC15 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5693976C08A37F31BE187960 /* Pods-LivenessDetectionTests.debug.xcconfig */,
-				201879ED64FDD5332AFF6703 /* Pods-LivenessDetectionTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		83057AF08C36D8BE4347A40D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3A3AC2FA253FC0C773EADFB2 /* Pods_LivenessDetectionTests.framework */,
-			);
-			name = Frameworks;
+			name = LivenessDetectionTests;
+			path = Sources/LivenessDetectionTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +147,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BADB0A2298D1DF4009F73C3 /* LivenessDetection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,11 +175,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BADB0A8298D1DF4009F73C3 /* Build configuration list for PBXNativeTarget "LivenessDetectionTests" */;
 			buildPhases = (
-				72486D591939DB00ECCBD88C /* [CP] Check Pods Manifest.lock */,
 				3BADB097298D1DF4009F73C3 /* Sources */,
 				3BADB098298D1DF4009F73C3 /* Frameworks */,
 				3BADB099298D1DF4009F73C3 /* Resources */,
-				B7569F009F8254B104B6D98E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,48 +252,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		72486D591939DB00ECCBD88C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LivenessDetectionTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7569F009F8254B104B6D98E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LivenessDetectionTests/Pods-LivenessDetectionTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LivenessDetectionTests/Pods-LivenessDetectionTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LivenessDetectionTests/Pods-LivenessDetectionTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		3BADB08D298D1DF4009F73C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -335,7 +264,6 @@
 				3BADB0B0298D1F2C009F73C3 /* WaveletDecomposition.swift in Sources */,
 				3BADB0B4298D1FAF009F73C3 /* DetectedSpoofDevice.swift in Sources */,
 				3BADB0BA298D2290009F73C3 /* ImageProcessingError.swift in Sources */,
-				3BADB096298D1DF4009F73C3 /* LivenessDetection.docc in Sources */,
 				3BADB0B2298D1F88009F73C3 /* SpoofDeviceDetector.swift in Sources */,
 				3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */,
 			);
@@ -545,7 +473,6 @@
 		};
 		3BADB0A9298D1DF4009F73C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5693976C08A37F31BE187960 /* Pods-LivenessDetectionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -562,7 +489,6 @@
 		};
 		3BADB0AA298D1DF4009F73C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 201879ED64FDD5332AFF6703 /* Pods-LivenessDetectionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

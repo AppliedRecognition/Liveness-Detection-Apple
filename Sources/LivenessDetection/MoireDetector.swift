@@ -190,7 +190,7 @@ public class MoireDetector: SpoofDetector {
     }
     
     func imageBufferFromCGImage(_ cgImage: CGImage) throws -> vImage_Buffer {
-        var colourSpace: Unmanaged<CGColorSpace> = cgImage.colorSpace != nil ? Unmanaged.passRetained(cgImage.colorSpace!) : Unmanaged.passRetained(CGColorSpaceCreateDeviceRGB())
+        let colourSpace: Unmanaged<CGColorSpace> = cgImage.colorSpace != nil ? Unmanaged.passRetained(cgImage.colorSpace!) : Unmanaged.passRetained(CGColorSpaceCreateDeviceRGB())
         var format = vImage_CGImageFormat(bitsPerComponent: UInt32(cgImage.bitsPerComponent), bitsPerPixel: UInt32(cgImage.bitsPerPixel), colorSpace: colourSpace, bitmapInfo: cgImage.bitmapInfo, version: 0, decode: nil, renderingIntent: .defaultIntent)
         let originalLength = cgImage.height * cgImage.bytesPerRow
         let originalBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: originalLength)
