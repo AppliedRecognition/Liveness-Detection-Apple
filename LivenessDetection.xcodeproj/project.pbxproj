@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B41991129B78238003AB87E /* Ver-ID identity.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 3B41991029B78238003AB87E /* Ver-ID identity.p12 */; };
 		3B41991329B882B4003AB87E /* SpoofDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991229B882B4003AB87E /* SpoofDetection.swift */; };
 		3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991429B88319003AB87E /* SpoofDetector.swift */; };
 		3B41997629BA70DE003AB87E /* test_input.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997529BA70DC003AB87E /* test_input.json */; };
@@ -40,7 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B41991029B78238003AB87E /* Ver-ID identity.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ver-ID identity.p12"; sourceTree = "<group>"; };
 		3B41991229B882B4003AB87E /* SpoofDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetection.swift; sourceTree = "<group>"; };
 		3B41991429B88319003AB87E /* SpoofDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector.swift; sourceTree = "<group>"; };
 		3B41997529BA70DC003AB87E /* test_input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_input.json; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 			children = (
 				3B41997729BA8677003AB87E /* test_output.json */,
 				3B41997529BA70DC003AB87E /* test_input.json */,
-				3B41991029B78238003AB87E /* Ver-ID identity.p12 */,
 				3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */,
 				3BB2BCD3299FAB6400CCEA18 /* BaseTest.swift */,
 				3BB2BCD5299FB47500CCEA18 /* MoireDetectorTest.swift */,
@@ -246,7 +243,6 @@
 			files = (
 				3B41997829BA8678003AB87E /* test_output.json in Resources */,
 				3B41997629BA70DE003AB87E /* test_input.json in Resources */,
-				3B41991129B78238003AB87E /* Ver-ID identity.p12 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,7 @@
 
 import XCTest
 import UIKit
-import VerIDCore
-import VerIDSDKIdentity
+import Vision
 @testable import LivenessDetection
 
 class BaseTest: XCTestCase {
@@ -91,6 +90,10 @@ class BaseTest: XCTestCase {
     
     func cgImage(at url: URL) throws -> CGImage {
         let uiImage = try self.image(at: url)
+        return try self.cgImage(from: uiImage)
+    }
+    
+    func cgImage(from uiImage: UIImage) throws -> CGImage {
         if let image = uiImage.cgImage {
             return image
         } else if let ciImage = uiImage.ciImage {
@@ -159,19 +162,15 @@ class BaseTest: XCTestCase {
         return try SpoofDetector3(modelURL: self.spoofDetectorModelURL)
     }
     
-    func createVerID() throws -> VerID {
-        let pwd = "78ccf0dc-7dda-4dd7-8fe0-f5e4e85d3f9e"
-        guard let url = Bundle(for: type(of: self)).url(forResource: "Ver-ID identity", withExtension: "p12") else {
-            throw NSError()
+    func image(_ image: UIImage, croppedToEyeRegionsOfFace face: VNFaceObservation) -> UIImage {
+        guard let rightEye = face.landmarks?.leftPupil?.pointsInImage(imageSize: image.size).first else {
+            return image
         }
-        let identity = try VerIDIdentity(url: url, password: pwd)
-        let verIDFactory = VerIDFactory(identity: identity)
-        return try verIDFactory.createVerIDSync()
-    }
-    
-    func image(_ image: UIImage, croppedToEyeRegionsOfFace face: Face) -> UIImage {
-        let distanceBetweenEyes = hypot(face.rightEye.y - face.leftEye.y, face.rightEye.x - face.leftEye.x)
-        let cropRect = CGRect(x: face.leftEye.x - distanceBetweenEyes * 0.75, y: min(face.leftEye.y, face.rightEye.y) - distanceBetweenEyes * 0.5, width: distanceBetweenEyes * 2.5, height: distanceBetweenEyes)
+        guard let leftEye = face.landmarks?.rightPupil?.pointsInImage(imageSize: image.size).first else {
+            return image
+        }
+        let distanceBetweenEyes = hypot(rightEye.y - leftEye.y, rightEye.x - leftEye.x)
+        let cropRect = CGRect(x: leftEye.x - distanceBetweenEyes * 0.75, y: min(leftEye.y, rightEye.y) - distanceBetweenEyes * 0.5, width: distanceBetweenEyes * 2.5, height: distanceBetweenEyes)
         UIGraphicsBeginImageContext(cropRect.size)
         defer {
             UIGraphicsEndImageContext()
@@ -180,21 +179,20 @@ class BaseTest: XCTestCase {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
     
-    func image(_ image: UIImage, croppedToFace face: Face) -> UIImage {
-        UIGraphicsBeginImageContext(face.bounds.size)
+    func image(_ image: UIImage, croppedToFace face: VNFaceObservation) -> UIImage {
+        UIGraphicsBeginImageContext(face.boundingBox.size)
         defer {
             UIGraphicsEndImageContext()
         }
-        image.draw(at: CGPoint(x: 0-face.bounds.minX, y: 0-face.bounds.minY))
+        image.draw(at: CGPoint(x: 0-face.boundingBox.minX, y: 0-face.boundingBox.minY))
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
     
     func failRatioOfDetectionOnEachImage(_ detector: SpoofDetector, detectFace: Bool) throws -> Float {
         var detectionCount: Float = 0
         var failCount: Float = 0
-        let verID: VerID? = detectFace ? try self.createVerID() : nil
         try withEachImage(types: [.spoofDevice]) { (image, url, positive) in
-            let roi = try verID?.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let roi = try self.detectFaceInImage(image)?.boundingBox
             let isSpoof = try detector.isSpoofedImage(image, regionOfInterest: roi)
             let success = (positive && isSpoof) || (!positive && !isSpoof)
             detectionCount += 1
@@ -206,13 +204,12 @@ class BaseTest: XCTestCase {
     }
     
     func falsePositiveAndNegativeRatiosOnEachImage(detectors: [SpoofDetector], detectFace: Bool) throws -> (Float, Float) {
-        let verID: VerID? = detectFace ? try self.createVerID() : nil
         var fpCount: Float = 0
         var fnCount: Float = 0
         var totalCount: Float = 0
         try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
             totalCount += 1
-            let roi = try verID?.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let roi = try self.detectFaceInImage(image)?.boundingBox
             var isSpoof: Bool = false
             for detector in detectors {
                 if try detector.isSpoofedImage(image, regionOfInterest: roi) {
@@ -228,6 +225,14 @@ class BaseTest: XCTestCase {
         }
         return (fpCount / totalCount, fnCount / totalCount)
     }
+    
+    func detectFaceInImage(_ image: UIImage) throws -> VNFaceObservation? {
+        let cgImage = try self.cgImage(from: image)
+        let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: image.imageOrientation.cgImagePropertyOrientation, options: [:])
+        let request = VNDetectFaceRectanglesRequest()
+        try imageRequestHandler.perform([request])
+        return request.results?.first
+    }
 }
 
 enum LivenessDetectionType: String, Decodable {
@@ -238,4 +243,30 @@ fileprivate struct FlaggedURL: Hashable {
     
     let url: URL
     let flagged: Bool
+}
+
+extension UIImage.Orientation {
+    
+    var cgImagePropertyOrientation: CGImagePropertyOrientation {
+        switch self {
+        case .up:
+            return .up
+        case .right:
+            return .right
+        case .down:
+            return .down
+        case .left:
+            return .left
+        case .upMirrored:
+            return .upMirrored
+        case .rightMirrored:
+            return .rightMirrored
+        case .downMirrored:
+            return .downMirrored
+        case .leftMirrored:
+            return .leftMirrored
+        default:
+            return .up
+        }
+    }
 }

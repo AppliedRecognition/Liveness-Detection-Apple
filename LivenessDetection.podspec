@@ -7,5 +7,5 @@ Pod::Spec.new do |spec|
   spec.author             = "Jakub Dolejs"
   spec.platform     = :ios, "12.0"
   spec.source       = { :git => "https://github.com/AppliedRecognition/Liveness-Detection-Apple.git", :tag => "v#{spec.version}" }
-  spec.source_files  = "LivenessDetection"
+  spec.source_files  = "Sources/LivenessDetection"
 end

@@ -13,23 +13,26 @@ let package = Package(
             targets: ["LivenessDetection"]
         )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/weichsel/ZIPFoundation",
+            from: "0.9.16"
+        )
+    ],
     targets: [
         .target(
             name: "LivenessDetection"
         ),
-//        // May enable this when VerIDCore is published as Swift package
-//        .testTarget(
-//            name: "LivenessDetectionTests",
-//            dependencies: ["LivenessDetection"],
-//            exclude: [
-//                "test_input.json", "test_output.json", "Ver-ID identity.p12"
-//            ],
-//            resources: [
-//                .copy("test_input.json"),
-//                .copy("test_output.json"),
-//                .copy("Ver-ID identity.p12")
-//            ]
-//        )
+        .testTarget(
+            name: "LivenessDetectionTests",
+            dependencies: ["LivenessDetection", "ZIPFoundation"],
+            exclude: [
+                "test_input.json", "test_output.json"
+            ],
+            resources: [
+                .copy("test_input.json"),
+                .copy("test_output.json")
+            ]
+        )
     ]
 )
