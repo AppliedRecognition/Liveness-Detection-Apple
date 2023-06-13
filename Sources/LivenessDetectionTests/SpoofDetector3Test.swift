@@ -7,8 +7,6 @@
 
 import XCTest
 import MobileCoreServices
-import VerIDCore
-import VerIDSDKIdentity
 import UniformTypeIdentifiers
 import CoreML
 @testable import LivenessDetection
@@ -85,12 +83,11 @@ final class SpoofDetector3Test: BaseTest {
     }
     
     func test_detectSpoofsOnVariouslyCroppedImages_attachCSV() throws {
-        let verID = try self.createVerID()
         var csv: String = "\"Image\",\"Positive\",\"Score\",\"Score (cropped to face)\",\"Score (cropped to eye region)\""
         try withEachImage(types: [.spoofDevice,.moire]) { (image, url, positive) in
             let confidence = try self.spoofDetector.detectSpoofInImage(image)
             csv.append(String(format: "\n\"%@\",%@,%.03f,", url.lastPathComponent, positive ? "1" : "0", confidence))
-            if let face = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first {
+            if let face = try self.detectFaceInImage(image) {
                 let faceImage = self.image(image, croppedToFace: face)
                 let eyeRegionImage = self.image(image, croppedToEyeRegionsOfFace: face)
                 let faceCropConfidence = try self.spoofDetector.detectSpoofInImage(faceImage)

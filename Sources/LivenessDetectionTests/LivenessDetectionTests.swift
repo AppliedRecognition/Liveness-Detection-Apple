@@ -8,7 +8,6 @@
 import XCTest
 import UIKit
 import ZIPFoundation
-import VerIDCore
 @testable import LivenessDetection
 
 final class LivenessDetectionTests: BaseTest {
@@ -47,9 +46,8 @@ final class LivenessDetectionTests: BaseTest {
         let maxFailRatio: Float = 0.2
         var detectionCount: Float = 0
         var failCount: Float = 0
-        let verID = try self.createVerID()
         try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
-            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let roi = try self.detectFaceInImage(image)?.boundingBox
             let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
             let success = (positive && isSpoof) || (!positive && !isSpoof)
             detectionCount += 1
@@ -66,12 +64,11 @@ final class LivenessDetectionTests: BaseTest {
         let maxFailRatio: Float = 0.2
         var detectionCount: Float = 0
         var failCount: Float = 0
-        let verID = try self.createVerID()
         try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
             if positive {
                 return
             }
-            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let roi = try self.detectFaceInImage(image)?.boundingBox
             let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
             detectionCount += 1
             if isSpoof {
@@ -87,12 +84,11 @@ final class LivenessDetectionTests: BaseTest {
         let maxFailRatio: Float = 0.2
         var detectionCount: Float = 0
         var failCount: Float = 0
-        let verID = try self.createVerID()
         try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
             if !positive {
                 return
             }
-            let roi = try verID.faceDetection.detectFacesInImage(image, limit: 1, options: 0).first?.bounds
+            let roi = try self.detectFaceInImage(image)?.boundingBox
             let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
             detectionCount += 1
             if !isSpoof {
