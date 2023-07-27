@@ -47,7 +47,7 @@ public class SpoofDetector3: SpoofDetector {
     
     public let identifier: String
     
-    public var confidenceThreshold: Float = 0.3
+    public var confidenceThreshold: Float = 0.45
     
     public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
         let img: UIImage
@@ -105,13 +105,7 @@ public class SpoofDetector3: SpoofDetector {
             throw NSError()
         }
         let vec: [Float] = [multiArray[0].floatValue, multiArray[1].floatValue]
-        return self.softmax(vec)
-    }
-    
-    func softmax(_ vec: [Float]) -> [Float] {
-        return vec.map({
-            exp($0) / vec.map({ exp($0) }).reduce(0, +)
-        })
+        return Utils.softmax(vec)
     }
     
     func prepareImage(_ image: UIImage) throws -> MLMultiArray {

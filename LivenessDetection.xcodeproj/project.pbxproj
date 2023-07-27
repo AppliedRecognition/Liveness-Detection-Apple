@@ -11,10 +11,15 @@
 		3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991429B88319003AB87E /* SpoofDetector.swift */; };
 		3B41997629BA70DE003AB87E /* test_input.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997529BA70DC003AB87E /* test_input.json */; };
 		3B41997829BA8678003AB87E /* test_output.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997729BA8677003AB87E /* test_output.json */; };
+		3B76E21E2A6B142400C59B0D /* SpoofDetector4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E21D2A6B142400C59B0D /* SpoofDetector4.swift */; };
+		3B76E2202A6B169200C59B0D /* SpoofDetector4Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E21F2A6B169200C59B0D /* SpoofDetector4Component.swift */; };
+		3B76E2222A6B174600C59B0D /* SpoofDetector4Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E2212A6B174600C59B0D /* SpoofDetector4Config.swift */; };
+		3B76E2242A6E9E7E00C59B0D /* SpoofDetector4Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */; };
+		3B76E2262A6EF65400C59B0D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E2252A6EF65400C59B0D /* Utils.swift */; };
+		3B76E22C2A700CA900C59B0D /* bounding_boxes.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B76E22B2A700CA800C59B0D /* bounding_boxes.json */; };
 		3BADB09C298D1DF4009F73C3 /* LivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */; };
 		3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */; };
 		3BADB0AC298D1E6E009F73C3 /* MoireDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */; };
-		3BADB0AE298D1EEB009F73C3 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AD298D1EEB009F73C3 /* Array2D.swift */; };
 		3BADB0B0298D1F2C009F73C3 /* WaveletDecomposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AF298D1F2C009F73C3 /* WaveletDecomposition.swift */; };
 		3BADB0B2298D1F88009F73C3 /* SpoofDeviceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */; };
 		3BADB0B4298D1FAF009F73C3 /* DetectedSpoofDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */; };
@@ -43,13 +48,18 @@
 		3B41991429B88319003AB87E /* SpoofDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector.swift; sourceTree = "<group>"; };
 		3B41997529BA70DC003AB87E /* test_input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_input.json; sourceTree = "<group>"; };
 		3B41997729BA8677003AB87E /* test_output.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_output.json; sourceTree = "<group>"; };
+		3B76E21D2A6B142400C59B0D /* SpoofDetector4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector4.swift; sourceTree = "<group>"; };
+		3B76E21F2A6B169200C59B0D /* SpoofDetector4Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector4Component.swift; sourceTree = "<group>"; };
+		3B76E2212A6B174600C59B0D /* SpoofDetector4Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector4Config.swift; sourceTree = "<group>"; };
+		3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector4Test.swift; sourceTree = "<group>"; };
+		3B76E2252A6EF65400C59B0D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		3B76E22B2A700CA800C59B0D /* bounding_boxes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bounding_boxes.json; sourceTree = "<group>"; };
 		3BA86E572991769100006E0B /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		3BA86E592991908100006E0B /* LivenessDetection.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LivenessDetection.podspec; sourceTree = "<group>"; };
 		3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LivenessDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB09B298D1DF4009F73C3 /* LivenessDetectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivenessDetectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivenessDetectionTests.swift; sourceTree = "<group>"; };
 		3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireDetector.swift; sourceTree = "<group>"; };
-		3BADB0AD298D1EEB009F73C3 /* Array2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		3BADB0AF298D1F2C009F73C3 /* WaveletDecomposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveletDecomposition.swift; sourceTree = "<group>"; };
 		3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDeviceDetector.swift; sourceTree = "<group>"; };
 		3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSpoofDevice.swift; sourceTree = "<group>"; };
@@ -108,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */,
-				3BADB0AD298D1EEB009F73C3 /* Array2D.swift */,
 				3BADB0AF298D1F2C009F73C3 /* WaveletDecomposition.swift */,
 				3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */,
 				3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */,
@@ -116,6 +125,10 @@
 				3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */,
 				3B41991229B882B4003AB87E /* SpoofDetection.swift */,
 				3B41991429B88319003AB87E /* SpoofDetector.swift */,
+				3B76E21D2A6B142400C59B0D /* SpoofDetector4.swift */,
+				3B76E21F2A6B169200C59B0D /* SpoofDetector4Component.swift */,
+				3B76E2212A6B174600C59B0D /* SpoofDetector4Config.swift */,
+				3B76E2252A6EF65400C59B0D /* Utils.swift */,
 			);
 			name = LivenessDetection;
 			path = Sources/LivenessDetection;
@@ -124,6 +137,7 @@
 		3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */ = {
 			isa = PBXGroup;
 			children = (
+				3B76E22B2A700CA800C59B0D /* bounding_boxes.json */,
 				3B41997729BA8677003AB87E /* test_output.json */,
 				3B41997529BA70DC003AB87E /* test_input.json */,
 				3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */,
@@ -132,6 +146,7 @@
 				3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */,
 				3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */,
 				3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */,
+				3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */,
 			);
 			name = LivenessDetectionTests;
 			path = Sources/LivenessDetectionTests;
@@ -243,6 +258,7 @@
 			files = (
 				3B41997829BA8678003AB87E /* test_output.json in Resources */,
 				3B41997629BA70DE003AB87E /* test_input.json in Resources */,
+				3B76E22C2A700CA900C59B0D /* bounding_boxes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +272,10 @@
 				3BADB0AC298D1E6E009F73C3 /* MoireDetector.swift in Sources */,
 				3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */,
 				3B41991329B882B4003AB87E /* SpoofDetection.swift in Sources */,
-				3BADB0AE298D1EEB009F73C3 /* Array2D.swift in Sources */,
+				3B76E2222A6B174600C59B0D /* SpoofDetector4Config.swift in Sources */,
+				3B76E2262A6EF65400C59B0D /* Utils.swift in Sources */,
+				3B76E21E2A6B142400C59B0D /* SpoofDetector4.swift in Sources */,
+				3B76E2202A6B169200C59B0D /* SpoofDetector4Component.swift in Sources */,
 				3BADB0B0298D1F2C009F73C3 /* WaveletDecomposition.swift in Sources */,
 				3BADB0B4298D1FAF009F73C3 /* DetectedSpoofDevice.swift in Sources */,
 				3BADB0BA298D2290009F73C3 /* ImageProcessingError.swift in Sources */,
@@ -271,6 +290,7 @@
 			files = (
 				3BB2BCD6299FB47500CCEA18 /* MoireDetectorTest.swift in Sources */,
 				3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */,
+				3B76E2242A6E9E7E00C59B0D /* SpoofDetector4Test.swift in Sources */,
 				3BB2BCD4299FAB6400CCEA18 /* BaseTest.swift in Sources */,
 				3BB2BCD8299FD49F00CCEA18 /* WaveletDecompositionTest.swift in Sources */,
 				3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */,
@@ -323,7 +343,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1001000;
+				CURRENT_PROJECT_VERSION = 1002000;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -342,7 +362,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -388,7 +408,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1001000;
+				CURRENT_PROJECT_VERSION = 1002000;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -401,7 +421,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
