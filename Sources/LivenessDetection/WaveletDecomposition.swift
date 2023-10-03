@@ -6,20 +6,22 @@
 //
 
 import Foundation
+import Accelerate
 
+@available(iOS 13, *)
 class WaveletDecomposition {
     
     let width: Int = 500
     let height: Int = 375
     let depth: Int = 1
     
-    func haarTransformArray(_ array: Array2D<UInt8>) throws -> (UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>) {
-        let dwt2d = try self.fwdHaarDWT2D(array)
-        var (cA, cH, cV, cD): ([Float],[Float],[Float],[Float]) = try self.splitFreqBands(dwt2d)
-        try self.scaleData(&cA, min: 0, max: 1)
-        try self.scaleData(&cH, min: -1, max: 1)
-        try self.scaleData(&cV, min: -1, max: 1)
-        try self.scaleData(&cD, min: -1, max: 1)
+    func haarTransformArray(_ array: [UInt8], columnCount: Int) -> (UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>, UnsafeMutablePointer<Float>) {
+        let dwt2d = self.fwdHaarDWT2D(array, columnCount: columnCount)
+        var (cA, cH, cV, cD): ([Float],[Float],[Float],[Float]) = self.splitFreqBands(dwt2d, columnCount: columnCount)
+        self.scaleData(&cA, min: 0, max: 1)
+        self.scaleData(&cH, min: -1, max: 1)
+        self.scaleData(&cV, min: -1, max: 1)
+        self.scaleData(&cD, min: -1, max: 1)
         let ptrCa = UnsafeMutablePointer<Float>.allocate(capacity: cA.count)
         ptrCa.initialize(from: &cA, count: cA.count)
         let ptrCh = UnsafeMutablePointer<Float>.allocate(capacity: cH.count)
@@ -31,181 +33,85 @@ class WaveletDecomposition {
         return (ptrCa, ptrCh, ptrCv, ptrCd)
     }
     
-    func scaleData(_ data: inout [Float], min: Float, max: Float) throws {
-        let scaler = MinMaxScaler(min: min, max: max)
-        try scaler.fitTransform(&data)
-    }
-    
-    func haarDWT1D(_ data: [Float], length: Int) -> [Float] {
-        var temp = [Float](repeating: 0, count: data.count)
-        let avg0: Float = 0.5
-        let avg1: Float = 0.5
-        let dif0: Float = 0.5
-        let dif1: Float = -0.5
-        let h = length / 2
-        DispatchQueue.concurrentPerform(iterations: h) { i in
-            let k = i * 2
-            temp[i] = data[k] * avg0 + data[k + 1] * avg1
-            temp[i + h] = data[k] * dif0 + data[k + 1] * dif1
-        }
-        return temp
-    }
-    
-    func fwdHaarDWT2D(_ data: Array2D<UInt8>) throws -> Array2D<Float> {
-        let levCols = data.cols
-        let levRows = data.rows
-        var output = try Array2D<Float>(data: [Float](repeating: 0, count: levRows * levCols), cols: levCols, rows: levRows)
-        let outputWriteQueue = OperationQueue()
-        outputWriteQueue.maxConcurrentOperationCount = 1
-        DispatchQueue.concurrentPerform(iterations: levRows) { i in
-            let row = self.haarDWT1D(data.row(i).map({ Float($0) }), length: levCols)
-            outputWriteQueue.addOperation {
-                do {
-                    try output.setValues(row, inRow: i)
-                } catch {}
+    func measureExecutionTime(block: () throws -> Void) -> String {
+        if #available(iOS 16, *) {
+            if let time = try? ContinuousClock().measure(block) {
+                return time.formatted(.units(allowed: [.seconds, .milliseconds], width: .abbreviated))
             }
+        } else {
+            try? block()
         }
-        outputWriteQueue.waitUntilAllOperationsAreFinished()
-        var cols = [[Float]](repeating: [Float](repeating: 0, count: levRows), count: levCols)
-        DispatchQueue.concurrentPerform(iterations: levCols) { i in
-            cols[i] = self.haarDWT1D(output.column(i), length: levRows)
-        }
-        for i in 0..<cols.count {
-            try output.setValues(cols[i], inColumn: i)
-        }
-        return output
+        return ""
     }
     
-    func splitFreqBands(_ data: Array2D<Float>) throws -> ([Float], [Float], [Float], [Float]) {
-        let levCols = data.cols
-        let levRows = data.rows
-        let halfRow = levRows / 2
-        let halfCol = levCols / 2
-        
-        guard let LL = data[0..<halfCol, 0..<halfRow]?.data else {
-            throw WaveletDecompositionError.failedToSplitBands
-        }
-        guard let LH = data[0..<halfCol, halfRow..<levRows]?.data else {
-            throw WaveletDecompositionError.failedToSplitBands
-        }
-        guard let HL = data[halfCol..<levCols, 0..<halfRow]?.data else {
-            throw WaveletDecompositionError.failedToSplitBands
-        }
-        guard let HH = data[halfCol..<levCols, halfRow..<levRows]?.data else {
-            throw WaveletDecompositionError.failedToSplitBands
-        }
-        
-        return (LL, LH, HL, HH)
+    func scaleData(_ data: inout [Float], min: Float, max: Float) {
+        let inpMax = vDSP.maximum(data)
+        let inpMin = vDSP.minimum(data)
+        vDSP.add(0-inpMin, data, result: &data)
+        vDSP.divide(data, inpMax-inpMin, result: &data)
+        data = data.map({ $0.isNaN ? 0 : $0 })
+        vDSP.add(multiplication: (a: data, b: max - min), min, result: &data)
     }
-}
+    
+    func haarDWT1D(_ data: [Float]) -> [Float] {
+        var avg0: Float = 0.5
+        var avg1: Float = 0.5
+        var dif0: Float = 0.5
+        var dif1: Float = -0.5
+        let stride1 = vDSP_Stride(1)
+        let stride2 = vDSP_Stride(2)
+        var buf1: [Float] = .init(repeating: .nan, count: data.count/2)
+        var buf2: [Float] = .init(repeating: .nan, count: data.count/2)
+        var out: [Float] = []
 
-fileprivate extension UInt8 {
-    
-    var doubleValue: Double {
-        return Double(self)
-    }
-    
-    var floatValue: Float {
-        return Float(self)
-    }
-}
+        vDSP_vsmul(data, stride2, &avg0, &buf1, stride1, vDSP_Length(buf1.count))
+        vDSP_vsmul(Array(data[1...]), stride2, &avg1, &buf2, stride1, vDSP_Length(buf1.count))
+        vDSP_vadd(buf1, stride1, buf2, stride1, &buf1, stride1, vDSP_Length(buf1.count))
+        out.append(contentsOf: buf1)
 
-fileprivate class ArrayUtils {
-    
-    class func setRow<T>(_ row: Int, of array: inout Array<Array<T>>, to values: Array<T>) {
-        for i in values.indices {
-            array[row][i] = values[i]
-        }
+        vDSP_vsmul(data, stride2, &dif0, &buf1, stride1, vDSP_Length(buf1.count))
+        vDSP_vsmul(Array(data[1...]), stride2, &dif1, &buf2, stride1, vDSP_Length(buf1.count))
+        vDSP_vadd(buf1, stride1, buf2, stride1, &buf1, stride1, vDSP_Length(buf1.count))
+        out.append(contentsOf: buf1)
+        return out
     }
     
-    class func setColumn<T>(_ column: Int, of array: inout Array<Array<T>>, to values: Array<T>) {
-        for row in array.indices {
-            array[row][column] = values[row]
+    func fwdHaarDWT2D(_ data: [UInt8], columnCount: Int) -> [Float] {
+        let input: [Float] = vDSP.integerToFloatingPoint(data, floatingPointType: Float.self)
+        var rows: [Float] = []
+        for i in stride(from: 0, to: data.count, by: columnCount) {
+            rows.append(contentsOf: self.haarDWT1D(Array(input[i..<i+columnCount]))
+            )
         }
+        let rowCount = data.count / columnCount
+        let stride1 = vDSP_Stride(1)
+        vDSP_mtrans(rows, stride1, &rows, stride1, UInt(columnCount), UInt(rowCount))
+        var cols: [Float] = []
+        for i in stride(from: 0, to: rows.count, by: rowCount) {
+            cols.append(contentsOf: self.haarDWT1D(Array(rows[i..<i+rowCount])))
+        }
+        vDSP_mtrans(cols, stride1, &cols, stride1, UInt(rowCount), UInt(columnCount))
+        return cols
     }
     
-    class func valuesInColumn<T>(_ column: Int, of array: Array<Array<T>>) -> Array<T> {
-        var output = Array<T>(repeating: array[0][0], count: array.count)
-        for row in array.indices {
-            output[row] = array[row][column]
-        }
-        return output
+    func splitFreqBands(_ data: [Float], columnCount: Int) -> ([Float], [Float], [Float], [Float]) {
+        let rowCount = data.count / columnCount
+        let stride1 = vDSP_Stride(1)
+        let halfRow = rowCount / 2
+        let halfCol = columnCount / 2
+        let quarterLength = rowCount/2*columnCount/2
+        var topHalf = Array(data[0..<rowCount*columnCount/2])
+        vDSP_mtrans(topHalf, stride1, &topHalf, stride1, vDSP_Length(columnCount), vDSP_Length(halfRow))
+        var topLeft = Array(topHalf[0..<quarterLength])
+        vDSP_mtrans(topLeft, stride1, &topLeft, stride1, vDSP_Length(halfRow), vDSP_Length(halfCol))
+        var topRight = Array(topHalf[quarterLength..<quarterLength*2])
+        vDSP_mtrans(topRight, stride1, &topRight, stride1, vDSP_Length(halfRow), vDSP_Length(halfCol))
+        var bottomHalf = Array(data[rowCount*columnCount/2..<data.count])
+        vDSP_mtrans(bottomHalf, stride1, &bottomHalf, stride1, vDSP_Length(columnCount), vDSP_Length(halfRow))
+        var bottomLeft = Array(bottomHalf[0..<quarterLength])
+        vDSP_mtrans(bottomLeft, stride1, &bottomLeft, stride1, vDSP_Length(halfRow), vDSP_Length(halfCol))
+        var bottomRight = Array(bottomHalf[quarterLength..<quarterLength*2])
+        vDSP_mtrans(bottomRight, stride1, &bottomRight, stride1, vDSP_Length(halfRow), vDSP_Length(halfCol))
+        return (topLeft, bottomLeft, topRight, bottomRight)
     }
-    
-    class func rangeOfValues<T>(_ array: Array<Array<T>>, cols: Range<Int>, rows: Range<Int>) -> Array<T> {
-        if array.isEmpty || array[0].isEmpty {
-            return []
-        }
-        var output = Array<T>(repeating: array[0][0], count: rows.count*cols.count)
-        var i = 0
-        for r in rows {
-            for c in cols {
-                output[i] = array[r][c]
-                i += 1
-            }
-        }
-        return output
-    }
-}
-
-class MinMaxScaler {
-    
-    let min: Float
-    let max: Float
-    
-    init(min: Float, max: Float) {
-        self.min = min
-        self.max = max
-    }
-    
-    func fitTransform(_ input: inout [Float]) throws {
-        if input.isEmpty {
-            throw MinMaxScalerError.emptyInputArray
-        }
-        guard let min = input.min(), let max = input.max() else {
-            throw MinMaxScalerError.minMaxOutOfRange
-        }
-        DispatchQueue.concurrentPerform(iterations: input.count) { i in
-            var std = (input[i] - min) / (max - min)
-            if std.isNaN {
-                std = 0.0
-            }
-            input[i] = std * (self.max - self.min) + self.min
-        }
-    }
-    
-    func fitTransform(_ input: [[Float]]) throws -> [[Float]] {
-        var min: Float = .greatestFiniteMagnitude
-        var max: Float = 0 - .greatestFiniteMagnitude
-        if input.isEmpty {
-            throw MinMaxScalerError.emptyInputArray
-        }
-        for sub in input {
-            if sub.isEmpty {
-                throw MinMaxScalerError.emptyInputArray
-            }
-            guard let subMin = sub.min(), let subMax = sub.max() else {
-                throw MinMaxScalerError.minMaxOutOfRange
-            }
-            min = Swift.min(subMin, min)
-            max = Swift.max(subMax, max)
-        }
-        return input.map { sub in
-            return sub.map {
-                var std = ($0 - min) / (max - min)
-                if std.isNaN {
-                    std = 0.0
-                }
-                return std * (self.max - self.min) + self.min
-            }
-        }
-    }
-}
-
-enum MinMaxScalerError: Int, Error {
-    case minMaxOutOfRange, emptyInputArray
-}
-
-enum WaveletDecompositionError: Int, Error {
-    case failedToSplitBands
 }

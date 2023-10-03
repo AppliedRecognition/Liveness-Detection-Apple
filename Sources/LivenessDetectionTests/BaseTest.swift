@@ -10,13 +10,22 @@ import UIKit
 import Vision
 @testable import LivenessDetection
 
-class BaseTest: XCTestCase {
+let indexURL = URL(string: "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/index.json")!
+
+class BaseTest<T: SpoofDetector>: XCTestCase {
     
     private var moireDetectorModelURL: URL!
     private var spoofDeviceDetectorModelURL: URL!
     private var spoofDetectorModelURL: URL!
+    private var spoofDetector4ModelURLs: [URL] = []
     private var imageURLs: [LivenessDetectionType:[Bool:[URL]]] = [:]
-    private static let indexURL = URL(string: "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/index.json")!
+    var spoofDetector: T!
+    var expectedSuccessRate: Float {
+        0.9
+    }
+    var confidenceThreshold: Float {
+        0.45
+    }
     
     override class func setUp() {
         super.setUp()
@@ -43,7 +52,18 @@ class BaseTest: XCTestCase {
         } else {
             throw NSError()
         }
-        let indexData = try Data(contentsOf: self.localURL(of: BaseTest.indexURL))
+        self.spoofDetector4ModelURLs = []
+        if let url = URL(string: "https://github.com/AppliedRecognition/Ver-ID-Models/raw/master/files/ARC_PSD-004_2.7_80x80.mlmodel") {
+            self.spoofDetector4ModelURLs.append(try self.localURL(of: url))
+        } else {
+            throw NSError()
+        }
+        if let url = URL(string: "https://github.com/AppliedRecognition/Ver-ID-Models/raw/master/files/ARC_PSD-004_4_80x80.mlmodel") {
+            self.spoofDetector4ModelURLs.append(try self.localURL(of: url))
+        } else {
+            throw NSError()
+        }
+        let indexData = try Data(contentsOf: self.localURL(of: indexURL))
         let index: [String:[String:[String]]] = try JSONDecoder().decode([String:[String:[String]]].self, from: indexData)
         self.imageURLs.removeAll()
         try index.forEach({ key, val in
@@ -62,6 +82,43 @@ class BaseTest: XCTestCase {
                 }
             }
         })
+        self.spoofDetector = try self.createSpoofDetector()
+        self.spoofDetector.confidenceThreshold = self.confidenceThreshold
+    }
+    
+    func createSpoofDetector() throws -> T {
+        fatalError("Method not implemented")
+    }
+    
+    func test_detectSpoofInImages_succeedsWithExpectedSuccessRate() throws {
+        var failCount: Float = 0
+        var totalCount: Float = 0
+        try self.withEachImage(types: [.moire,.spoofDevice]) { image, url, positive in
+            let roi = try self.detectFaceInImage(image)?.boundingBox
+            let isSpoof = try self.spoofDetector.isSpoofedImage(image, regionOfInterest: roi)
+            if (isSpoof && !positive) || (!isSpoof && positive) {
+                failCount += 1
+            }
+            totalCount += 1
+        }
+        let failRate = failCount / totalCount
+        XCTAssertGreaterThanOrEqual(1-failRate, self.expectedSuccessRate)
+    }
+    
+    func test_measureInferenceSpeed() throws {
+        let image = try self.firstImage(type: .spoofDevice, positive: true)
+        let measureOptions = XCTMeasureOptions.default
+        measureOptions.invocationOptions = [.manuallyStart, .manuallyStop]
+        self.measure(options: measureOptions) {
+            do {
+                let roi = try self.detectFaceInImage(image)?.boundingBox
+                self.startMeasuring()
+                _ = try self.spoofDetector.detectSpoofInImage(image, regionOfInterest: roi)
+                self.stopMeasuring()
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+        }
     }
     
     static func cacheURL(of url: URL) throws -> URL {
@@ -158,8 +215,12 @@ class BaseTest: XCTestCase {
         return try SpoofDeviceDetector(modelURL: self.spoofDeviceDetectorModelURL)
     }
     
-    func createSpoofDetector() throws -> SpoofDetector3 {
+    func createSpoofDetector3() throws -> SpoofDetector3 {
         return try SpoofDetector3(modelURL: self.spoofDetectorModelURL)
+    }
+    
+    func createSpoofDetector4() throws -> SpoofDetector4 {
+        return try SpoofDetector4(modelURL1: self.spoofDetector4ModelURLs[0], modelURL2: self.spoofDetector4ModelURLs[1])
     }
     
     func image(_ image: UIImage, croppedToEyeRegionsOfFace face: VNFaceObservation) -> UIImage {

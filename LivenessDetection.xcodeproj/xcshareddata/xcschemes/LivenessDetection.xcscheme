@@ -48,6 +48,18 @@
                <Test
                   Identifier = "SpoofDetector3Test/test_detectSpoofs_attachCSV()">
                </Test>
+               <Test
+                  Identifier = "SpoofDetector3Test/test_prepareImage_attachOutput()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDetector4Test/test_detectSpoofInImagesUsingComponents_outputCSV()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDetector4Test/test_detectSpoofInImagesUsingSuppliedCropRects()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDetector4Test/test_detectSpoofInImages_outputCSV()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

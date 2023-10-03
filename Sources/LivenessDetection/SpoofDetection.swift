@@ -10,7 +10,14 @@ import UIKit
 
 /// Liveness detection using one or more spoof detectors
 /// - Since: 1.1.0
-public class SpoofDetection {
+public class SpoofDetection: SpoofDetector {
+    
+    public lazy var identifier: String = {
+        self.spoofDetectors.map({ $0.identifier }).joined(separator: ", ")
+    }()
+    
+    public var confidenceThreshold: Float = 0.45
+    
     
     /// Spoof detectors used for liveness detection
     /// - Since: 1.1.0
@@ -37,7 +44,7 @@ public class SpoofDetection {
     /// - Returns: Maximum confidence score returned by one of the spoof detectors
     /// - Since: 1.1.0
     public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
-        return try self.spoofDetectors.map { try $0.detectSpoofInImage(image, regionOfInterest: roi) }.max() ?? 0
+        return try self.spoofDetectors.map { try $0.detectSpoofInImage(image, regionOfInterest: roi) }.reduce(0, +) / Float(self.spoofDetectors.count)
     }
     
     /// Detect spoofs in image
@@ -59,11 +66,6 @@ public class SpoofDetection {
     /// - Note: The function runs a spoof check on the spoof detectors until one of them returns `true`. The function returns `false` if it iterates over all the spoof detectors and none of them returns `true`.
     /// - Since: 1.1.0
     public func isSpoofedImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Bool {
-        for detector in spoofDetectors {
-            if try detector.isSpoofedImage(image, regionOfInterest: roi) {
-                return true
-            }
-        }
-        return false
+        try self.detectSpoofInImage(image, regionOfInterest: roi) >= self.confidenceThreshold
     }
 }

@@ -10,118 +10,14 @@ import UIKit
 import ZIPFoundation
 @testable import LivenessDetection
 
-final class LivenessDetectionTests: BaseTest {
+final class LivenessDetectionTests: BaseTest<SpoofDetection> {
     
-    var spoofDeviceDetector: SpoofDeviceDetector!
-    var moireDetector: MoireDetector!
-    var spoofDetector: SpoofDetector3!
-    var spoofDetection: SpoofDetection!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        self.spoofDeviceDetector = try createSpoofDeviceDetector()
-        self.moireDetector = try createMoireDetector()
-        self.spoofDetector = try createSpoofDetector()
-        self.spoofDetection = SpoofDetection(self.spoofDeviceDetector, self.moireDetector, self.spoofDetector)
+    override var expectedSuccessRate: Float {
+        0.83
     }
-    
-    func test_livenessDetection_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        var detectionCount: Float = 0
-        var failCount: Float = 0
-        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
-            let isSpoof = try self.spoofDetection.isSpoofedImage(image)
-            let success = (positive && isSpoof) || (!positive && !isSpoof)
-            detectionCount += 1
-            if !success {
-                failCount += 1
-            }
-        }
-        let failRatio = failCount / detectionCount
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
-    }
-    
-    func test_livenessDetectionWithROI_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        var detectionCount: Float = 0
-        var failCount: Float = 0
-        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
-            let roi = try self.detectFaceInImage(image)?.boundingBox
-            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
-            let success = (positive && isSpoof) || (!positive && !isSpoof)
-            detectionCount += 1
-            if !success {
-                failCount += 1
-            }
-        }
-        let failRatio = failCount / detectionCount
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
-    }
-    
-    func test_falsePositiveRateWithROI_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        var detectionCount: Float = 0
-        var failCount: Float = 0
-        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
-            if positive {
-                return
-            }
-            let roi = try self.detectFaceInImage(image)?.boundingBox
-            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
-            detectionCount += 1
-            if isSpoof {
-                failCount += 1
-            }
-        }
-        let failRatio = failCount / detectionCount
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
-    }
-    
-    func test_falseNegativeRateWithROI_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        var detectionCount: Float = 0
-        var failCount: Float = 0
-        try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
-            if !positive {
-                return
-            }
-            let roi = try self.detectFaceInImage(image)?.boundingBox
-            let isSpoof = try self.spoofDetection.isSpoofedImage(image, regionOfInterest: roi)
-            detectionCount += 1
-            if !isSpoof {
-                failCount += 1
-            }
-        }
-        let failRatio = failCount / detectionCount
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
-    }
-    
-    func test_falseRatesOnAllModelsWithROI() throws {
-        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector, self.spoofDetector], detectFace: true)
-        NSLog("False positive ratio (all models): %.02f%%", fpRatio * 100)
-        NSLog("False negative ratio (all models): %.02f%%", fnRatio * 100)
-    }
-    
-    func test_falseRatesWithoutSpoof3WithROI() throws {
-        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector], detectFace: true)
-        NSLog("False positive ratio (without spoof3): %.02f%%", fpRatio * 100)
-        NSLog("False negative ratio (without spoof3): %.02f%%", fnRatio * 100)
-    }
-    
-    func test_falseRatesOnAllModels() throws {
-        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector, self.spoofDetector], detectFace: false)
-        NSLog("False positive ratio (all models): %.02f%%", fpRatio * 100)
-        NSLog("False negative ratio (all models): %.02f%%", fnRatio * 100)
-    }
-    
-    func test_falseRatesWithoutSpoof3() throws {
-        let (fpRatio, fnRatio) = try self.falsePositiveAndNegativeRatiosOnEachImage(detectors: [self.spoofDeviceDetector, self.moireDetector], detectFace: false)
-        NSLog("False positive ratio (without spoof3): %.02f%%", fpRatio * 100)
-        NSLog("False negative ratio (without spoof3): %.02f%%", fnRatio * 100)
+        
+    override func createSpoofDetector() throws -> SpoofDetection {
+        try SpoofDetection(self.createMoireDetector(), self.createSpoofDeviceDetector(), self.createSpoofDetector3(), self.createSpoofDetector4())
     }
     
     func test_livenessDetection_attachAnnotatedImages() throws {
@@ -132,7 +28,9 @@ final class LivenessDetectionTests: BaseTest {
             return
         }
         try self.withEachImage(types: [.moire, .spoofDevice]) { (image, url, positive) in
-            let spoofs = try self.spoofDeviceDetector.detectSpoofDevicesInImage(image)
+            guard let spoofs = try (self.spoofDetector.spoofDetectors.first(where: { $0 is SpoofDeviceDetector }) as? SpoofDeviceDetector)?.detectSpoofDevicesInImage(image) else {
+                return
+            }
             var imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
             for spoof in spoofs {
                 imageRect = imageRect.union(spoof.boundingBox)
@@ -174,7 +72,9 @@ final class LivenessDetectionTests: BaseTest {
             let spoofConfidenceString = self.attributedString(String(format: "Spoof: %.03f", spoofConfidence), colour: .black)
             let stringSize = spoofConfidenceString.size()
             spoofConfidenceString.draw(at: CGPoint(x: imageRect.maxX - stringSize.width - padding, y: imageRect.maxY - addedHeight + padding))
-            let confidence = try self.moireDetector.detectMoireInImage(image)
+            guard let confidence = try self.spoofDetector.spoofDetectors.first(where: { $0 is MoireDetector })?.detectSpoofInImage(image, regionOfInterest: nil) else {
+                return
+            }
             self.attributedString(String(format: "Moire: %.03f", confidence), colour: .black).draw(at: CGPoint(x: padding, y: imageRect.maxY - addedHeight + padding))
             if let annotatedImage = UIGraphicsGetImageFromCurrentImageContext() {
                 guard let imageData = annotatedImage.jpegData(compressionQuality: 0.9) else {

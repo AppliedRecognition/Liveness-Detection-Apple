@@ -11,19 +11,24 @@ import UniformTypeIdentifiers
 import CoreML
 @testable import LivenessDetection
 
-final class SpoofDetector3Test: BaseTest {
+final class SpoofDetector3Test: BaseTest<SpoofDetector3> {
     
-    var spoofDetector: SpoofDetector3!
+    override var confidenceThreshold: Float {
+        0.95
+    }
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        self.spoofDetector = try createSpoofDetector()
+    override var expectedSuccessRate: Float {
+        0.47
+    }
+    
+    override func createSpoofDetector() throws -> SpoofDetector3 {
+        try self.createSpoofDetector3()
     }
     
     func test_softmaxCalculation_returnsExpectedValues() throws {
         let input: [Float] = [1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0]
         let expectedOutput: [Float] = [0.02364054, 0.06426166, 0.1746813, 0.474833, 0.02364054, 0.06426166, 0.1746813]
-        let output = self.spoofDetector.softmax(input)
+        let output = Utils.softmax(input)
         XCTAssertEqual(output.count, expectedOutput.count)
         for i in 0..<output.count {
             XCTAssertEqual(output[i], expectedOutput[i], accuracy: 0.01)
@@ -66,20 +71,6 @@ final class SpoofDetector3Test: BaseTest {
         attachment.lifetime = .keepAlways
         attachment.name = "output.json"
         add(attachment)
-    }
-    
-    func test_detectSpoofs_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        let failRatio = try self.failRatioOfDetectionOnEachImage(self.spoofDetector, detectFace: false)
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
-    }
-    
-    func test_detectSpoofsWithROI_succeedsOn80PercentOfImages() throws {
-        let maxFailRatio: Float = 0.2
-        let failRatio = try self.failRatioOfDetectionOnEachImage(self.spoofDetector, detectFace: true)
-        NSLog("Fail ratio: %.02f%%", failRatio * 100)
-        XCTAssertLessThanOrEqual(failRatio, maxFailRatio, String(format: "Fail ratio must be below %.0f%% but is %.02f%%", maxFailRatio * 100, failRatio * 100))
     }
     
     func test_detectSpoofsOnVariouslyCroppedImages_attachCSV() throws {

@@ -14,6 +14,7 @@ import Accelerate
 ///
 /// Detects moire pattern artifacts in image
 /// - Since: 1.0.0
+@available(iOS 13, *)
 public class MoireDetector: SpoofDetector {
     
     let imageLongerSideLength: Int = 1000
@@ -47,16 +48,10 @@ public class MoireDetector: SpoofDetector {
     
     public let identifier: String
     
-    public var confidenceThreshold: Float = 0.3
+    public var confidenceThreshold: Float = 0.45
     
     public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
-        if #available(iOS 13, *) {
-            return try self.detectMoireInImage(image)
-        } else if let cgImage = image.cgImage {
-            return try self.detectMoireInImage(cgImage)
-        } else {
-            throw ImageProcessingError.cgImageConversionError
-        }
+        return try self.detectMoireInImage(image)
     }
     
     // MARK: -
@@ -67,8 +62,8 @@ public class MoireDetector: SpoofDetector {
     /// does not contain moire artifacts and `1` means 100% confidence that it does.
     /// - Since: 1.0.0
     public func detectMoireInImage(_ image: CGImage) throws -> Float {
-        let wavelet: Array2D<UInt8> = try self.processImage(image)
-        let (imgLL, imgLH, imgHL, imgHH) = try self.waveletDecomposition.haarTransformArray(wavelet)
+        let (wavelet, columnCount) = try self.processImage(image)
+        let (imgLL, imgLH, imgHL, imgHH) = self.waveletDecomposition.haarTransformArray(wavelet, columnCount: columnCount)
         let multiArrays = ["input_1": imgLL, "input_2": imgLH, "input_3": imgHL, "input_4": imgHH]
         let featureProvider = try self.featureProviderFromInput(multiArrays)
         let prediction = try self.predictionFromFeatureProvider(featureProvider)
@@ -131,7 +126,7 @@ public class MoireDetector: SpoofDetector {
         return try MLDictionaryFeatureProvider(dictionary: dict)
     }
     
-    func processImage(_ image: CGImage) throws -> Array2D<UInt8> {
+    func processImage(_ image: CGImage) throws -> ([UInt8],Int) {
         guard let resizedImage = self.resizeImage(image) else {
             throw ImageProcessingError.imageResizingError
         }
@@ -197,17 +192,13 @@ public class MoireDetector: SpoofDetector {
         var originalBuffer = vImage_Buffer(data: originalBytes, height:vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.bytesPerRow)
         let error = vImageBuffer_InitWithCGImage(&originalBuffer, &format, nil, cgImage, numericCast(kvImageNoAllocate))
         guard error == kvImageNoError else {
-            if #available(iOS 13, *) {
-                originalBuffer.free()
-            } else {
-                originalBytes.deallocate()
-            }
+            originalBuffer.free()
             throw ImageProcessingError.cgImageFromBufferError
         }
         return originalBuffer
     }
     
-    func grayscaleFromCGImage(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) throws -> Array2D<UInt8> {
+    func grayscaleFromCGImage(_ cgImage: CGImage, orientation: CGImagePropertyOrientation) throws -> ([UInt8],Int) {
         var colourSpace: Unmanaged<CGColorSpace>
         if cgImage.colorSpace != nil {
             colourSpace = Unmanaged.passRetained(cgImage.colorSpace!)
@@ -219,11 +210,7 @@ public class MoireDetector: SpoofDetector {
         let originalBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: originalLength)
         var originalBuffer = vImage_Buffer(data: originalBytes, height:vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.bytesPerRow)
         defer {
-            if #available(iOS 13, *) {
-                originalBuffer.free()
-            } else {
-                originalBytes.deallocate()
-            }
+            originalBuffer.free()
         }
         var error = vImageBuffer_InitWithCGImage(&originalBuffer, &format, nil, cgImage, numericCast(kvImageNoAllocate))
         guard error == kvImageNoError else {
@@ -236,11 +223,7 @@ public class MoireDetector: SpoofDetector {
         let outPixels = UnsafeMutablePointer<UInt8>.allocate(capacity: outLength)
         var outputPlanar = vImage_Buffer(data: outPixels, height: vImagePixelCount(cgImage.height), width: vImagePixelCount(cgImage.width), rowBytes: cgImage.width)
         defer {
-            if #available(iOS 13, *) {
-                outputPlanar.free()
-            } else {
-                outPixels.deallocate()
-            }
+            outputPlanar.free()
         }
         let divisor: Float = 0x1000
         var matrix: [Int16] = [0,Int16(0.299*divisor),Int16(0.587*divisor),Int16(0.114*divisor)]
@@ -251,7 +234,7 @@ public class MoireDetector: SpoofDetector {
         return try self.correctOrientationInImage(&outputPlanar, orientation: orientation)
     }
     
-    func correctOrientationInImage(_ image: inout vImage_Buffer, orientation: CGImagePropertyOrientation) throws -> Array2D<UInt8> {
+    func correctOrientationInImage(_ image: inout vImage_Buffer, orientation: CGImagePropertyOrientation) throws -> ([UInt8],Int) {
         // Get the vImage rotation constant based on the UI orientation
         let rotation: UInt8
         switch orientation {
@@ -281,38 +264,13 @@ public class MoireDetector: SpoofDetector {
         let rotatedData = UnsafeMutablePointer<UInt8>.allocate(capacity: destSize)
         var outBuffer = vImage_Buffer(data: rotatedData, height: outHeight, width: outWidth, rowBytes: outBytesPerRow)
         defer {
-            if #available(iOS 13, *) {
-                outBuffer.free()
-            } else {
-                rotatedData.deallocate()
-            }
+            outBuffer.free()
         }
         guard vImageRotate90_Planar8(&image, &outBuffer, rotation, 0, numericCast(kvImageNoFlags)) == kvImageNoError else {
             throw ImageProcessingError.imageRotationError
         }
         let grayscaleData = Array(UnsafeBufferPointer(start: rotatedData, count: destSize))
-        return try Array2D(data: grayscaleData, cols: Int(outWidth), rows: Int(outHeight))
-    }
-    
-    func debugImageFromGrayscaleArray(_ grayscaleArray: Array2D<UInt8>) throws -> UIImage {
-        let targetColourSpace = Unmanaged.passUnretained(CGColorSpaceCreateDeviceGray())
-        var targetFormat = vImage_CGImageFormat(bitsPerComponent: 8, bitsPerPixel: 8, colorSpace: targetColourSpace, bitmapInfo: CGBitmapInfo(rawValue: 0), version: 0, decode: nil, renderingIntent: .defaultIntent)
-        var input: [UInt8] = grayscaleArray.data
-        let grayscalePixels = UnsafeMutablePointer<UInt8>.allocate(capacity: grayscaleArray.data.count)
-        grayscalePixels.initialize(from: &input, count: input.count)
-        var grayscaleBuffer = vImage_Buffer(data: grayscalePixels, height: vImagePixelCount(grayscaleArray.rows), width: vImagePixelCount(grayscaleArray.cols), rowBytes: grayscaleArray.cols)
-        defer {
-            if #available(iOS 13, *) {
-                grayscaleBuffer.free()
-            } else {
-                grayscalePixels.deallocate()
-            }
-        }
-        var error: Int = kvImageNoError
-        guard let target = vImageCreateCGImageFromBuffer(&grayscaleBuffer, &targetFormat, nil, nil, numericCast(kvImageNoFlags), &error) else {
-            throw ImageProcessingError.cgImageFromBufferError
-        }
-        return UIImage(cgImage: target.takeRetainedValue())
+        return (grayscaleData, Int(outWidth))
     }
     
     func resizeImage(_ image: CGImage) -> CGImage? {
