@@ -360,10 +360,6 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         return try SpoofDetector4(modelURL1: self.spoofDetector4ModelURLs[0], modelURL2: self.spoofDetector4ModelURLs[1])
     }
     
-    func createSpoofDetector5() throws -> SpoofDetector5 {
-        return try SpoofDetector5(configuration: SpoofDetector5Config(modelURL: self.spoofDetector5ModelURL))
-    }
-    
     func image(_ image: UIImage, croppedToEyeRegionsOfFace face: VNFaceObservation) -> UIImage {
         guard let rightEye = face.landmarks?.leftPupil?.pointsInImage(imageSize: image.size).first else {
             return image

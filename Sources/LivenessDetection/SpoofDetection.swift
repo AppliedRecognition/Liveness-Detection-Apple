@@ -24,14 +24,11 @@ public class SpoofDetection: SpoofDetector {
     /// - Since: 1.1.0
     public let spoofDetectors: [SpoofDetector]
     
-    private let scoreFusionModel: LivenessModelScoreFusion?
-    
     /// Initializer
     /// - Parameter spoofDetector: Spoof detectors to use for liveness detection
     /// - Since: 1.1.0
     public init(_ spoofDetector: SpoofDetector...) {
         self.spoofDetectors = spoofDetector
-        self.scoreFusionModel = try? LivenessModelScoreFusion(configuration: .init())
     }
     
     /// Initializer
@@ -39,7 +36,6 @@ public class SpoofDetection: SpoofDetector {
     /// - Since: 1.1.0
     public init(_ spoofDetectors: [SpoofDetector]) {
         self.spoofDetectors = spoofDetectors
-        self.scoreFusionModel = try? LivenessModelScoreFusion(configuration: .init())
     }
     
     /// Detect a spoof in image
@@ -88,33 +84,6 @@ public class SpoofDetection: SpoofDetector {
     }
     
     private func fuseScores(_ scores: [String: Float]) throws -> Float {
-//        if #available(iOS 13, *), let scoreFusionModel = self.scoreFusionModel, self.spoofDetectors.count == 3 && self.spoofDetectors.contains(where: { $0 is SpoofDeviceDetector }) && self.spoofDetectors.contains(where: { $0 is MoireDetector }) && self.spoofDetectors.contains(where: { $0 is SpoofDetector3 }) {
-//            let psd001 = scores[self.spoofDetectors.first(where: { $0 is SpoofDeviceDetector })!.identifier]!
-//            let psd002 = scores[self.spoofDetectors.first(where: { $0 is MoireDetector })!.identifier]!
-//            let psd003 = scores[self.spoofDetectors.first(where: { $0 is SpoofDetector3 })!.identifier]!
-//            let prediction = try scoreFusionModel.prediction(PSD001: Double(psd001), PSD002: Double(psd002), PSD003: Double(psd003))
-//            return Float(prediction.Is_liveProbability[0]!)
-//        } else {
-//            return scores.values.reduce(0, +) / Float(self.spoofDetectors.count)
-//        }
-//        if #available(iOS 13, *), self.spoofDetectors.count == 3, let psd001 = self.spoofDetectors.first(where: { $0 is SpoofDeviceDetector }) as? SpoofDeviceDetector, let psd002 = self.spoofDetectors.first(where: { $0 is MoireDetector }) as? MoireDetector, let psd003 = self.spoofDetectors.first(where: { $0 is SpoofDetector3 }) as? SpoofDetector3, let psd001Weigths = self.weights(for: psd001), let psd002Weigths = self.weights(for: psd002), let psd003Weights = self.weights(for: psd003) {
-//            let psd001Score = scores[psd001.identifier]!
-//            let psd002Score = scores[psd002.identifier]!
-//            let psd003Score = scores[psd003.identifier]!
-//            var inputScores = [psd001Score, psd002Score, psd003Score]
-//            let mul = [psd001Weigths[0], psd002Weigths[0], psd003Weights[0]]
-//            let add = [psd001Weigths[1], psd002Weigths[1], psd003Weights[1]]
-//            let relu = [psd001Weigths[2], psd002Weigths[2], psd003Weights[2]]
-//            inputScores = vDSP.multiply(inputScores, mul)
-//            inputScores = vDSP.add(inputScores, add)
-//            for i in 0..<inputScores.count {
-//                if inputScores[i] < 0 {
-//                    inputScores[i] *= relu[i]
-//                }
-//            }
-//            let score = vDSP.sum(inputScores) - 2.8539
-//            return score
-//        }
         let weigths = self.weights
         if !weigths.isEmpty {
             return min(scores.compactMap { key, val in
@@ -162,18 +131,5 @@ public class SpoofDetection: SpoofDetector {
             ]
         }
         return [:]
-    }
-    
-    private func weights<S>(for spoofDetector: S) -> [Float]? where S: SpoofDetector {
-        if spoofDetector is SpoofDeviceDetector {
-            return [5.47163, 0.30951, -0.0840]
-        }
-        if #available(iOS 13, *), spoofDetector is MoireDetector {
-            return [1.54904, 0.05709, -0.1398]
-        }
-        if spoofDetector is SpoofDetector3 {
-            return [0.82332, 0.00906, 0.05322]
-        }
-        return nil
     }
 }
