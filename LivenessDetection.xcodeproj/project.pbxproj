@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		245A82D84DAFE257C25C70DA /* Pods_LivenessDetection_LivenessDetectionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841565BDA5601999AC89CA3 /* Pods_LivenessDetection_LivenessDetectionTests.framework */; };
+		3B364A172ABC90D400E72A88 /* SpoofDetector5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B364A162ABC90D400E72A88 /* SpoofDetector5.swift */; };
+		3B364A1B2ABCC48F00E72A88 /* SpoofDetector5Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B364A1A2ABCC48F00E72A88 /* SpoofDetector5Config.swift */; };
+		3B364A1D2ABCC84000E72A88 /* SpoofDetector5Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B364A1C2ABCC84000E72A88 /* SpoofDetector5Test.swift */; };
 		3B41991329B882B4003AB87E /* SpoofDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991229B882B4003AB87E /* SpoofDetection.swift */; };
 		3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991429B88319003AB87E /* SpoofDetector.swift */; };
 		3B41997629BA70DE003AB87E /* test_input.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997529BA70DC003AB87E /* test_input.json */; };
@@ -31,6 +35,7 @@
 		3BB2BCE0299FFB2A00CCEA18 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB2BCDF299FFB2A00CCEA18 /* ZIPFoundation */; };
 		3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */; };
 		3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */; };
+		E75FFA5F59E46F8D36FF50CE /* Pods_LivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6D21C5C0C5EBB4246B228F /* Pods_LivenessDetection.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0711E004E11083C44C28258B /* Pods-LivenessDetection-LivenessDetectionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetection-LivenessDetectionTests.release.xcconfig"; path = "Target Support Files/Pods-LivenessDetection-LivenessDetectionTests/Pods-LivenessDetection-LivenessDetectionTests.release.xcconfig"; sourceTree = "<group>"; };
+		0841565BDA5601999AC89CA3 /* Pods_LivenessDetection_LivenessDetectionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivenessDetection_LivenessDetectionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		207682A7C62F3C323821BFE2 /* Pods-LivenessDetection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetection.release.xcconfig"; path = "Target Support Files/Pods-LivenessDetection/Pods-LivenessDetection.release.xcconfig"; sourceTree = "<group>"; };
+		3B364A162ABC90D400E72A88 /* SpoofDetector5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector5.swift; sourceTree = "<group>"; };
+		3B364A1A2ABCC48F00E72A88 /* SpoofDetector5Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector5Config.swift; sourceTree = "<group>"; };
+		3B364A1C2ABCC84000E72A88 /* SpoofDetector5Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector5Test.swift; sourceTree = "<group>"; };
 		3B41991229B882B4003AB87E /* SpoofDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetection.swift; sourceTree = "<group>"; };
 		3B41991429B88319003AB87E /* SpoofDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector.swift; sourceTree = "<group>"; };
 		3B41997529BA70DC003AB87E /* test_input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_input.json; sourceTree = "<group>"; };
@@ -71,6 +82,9 @@
 		3BCE0EEB29B22F6800619853 /* SpoofDetector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3.swift; sourceTree = "<group>"; };
 		3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector3Test.swift; sourceTree = "<group>"; };
 		3BF43A892A2A06F1007011D1 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		5E6D21C5C0C5EBB4246B228F /* Pods_LivenessDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivenessDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD4765D52BE83167B33E32B4 /* Pods-LivenessDetection-LivenessDetectionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetection-LivenessDetectionTests.debug.xcconfig"; path = "Target Support Files/Pods-LivenessDetection-LivenessDetectionTests/Pods-LivenessDetection-LivenessDetectionTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BA0490D8B20B550EB3284CED /* Pods-LivenessDetection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivenessDetection.debug.xcconfig"; path = "Target Support Files/Pods-LivenessDetection/Pods-LivenessDetection.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E75FFA5F59E46F8D36FF50CE /* Pods_LivenessDetection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +102,7 @@
 			files = (
 				3BADB09C298D1DF4009F73C3 /* LivenessDetection.framework in Frameworks */,
 				3BB2BCE0299FFB2A00CCEA18 /* ZIPFoundation in Frameworks */,
+				245A82D84DAFE257C25C70DA /* Pods_LivenessDetection_LivenessDetectionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +118,8 @@
 				3BADB093298D1DF4009F73C3 /* LivenessDetection */,
 				3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */,
 				3BADB092298D1DF4009F73C3 /* Products */,
+				7A41BD4602B8ABF4FDBA14A7 /* Pods */,
+				FC4552871DC98636C968F886 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +147,8 @@
 				3B76E21F2A6B169200C59B0D /* SpoofDetector4Component.swift */,
 				3B76E2212A6B174600C59B0D /* SpoofDetector4Config.swift */,
 				3B76E2252A6EF65400C59B0D /* Utils.swift */,
+				3B364A162ABC90D400E72A88 /* SpoofDetector5.swift */,
+				3B364A1A2ABCC48F00E72A88 /* SpoofDetector5Config.swift */,
 			);
 			name = LivenessDetection;
 			path = Sources/LivenessDetection;
@@ -147,9 +167,30 @@
 				3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */,
 				3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */,
 				3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */,
+				3B364A1C2ABCC84000E72A88 /* SpoofDetector5Test.swift */,
 			);
 			name = LivenessDetectionTests;
 			path = Sources/LivenessDetectionTests;
+			sourceTree = "<group>";
+		};
+		7A41BD4602B8ABF4FDBA14A7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA0490D8B20B550EB3284CED /* Pods-LivenessDetection.debug.xcconfig */,
+				207682A7C62F3C323821BFE2 /* Pods-LivenessDetection.release.xcconfig */,
+				AD4765D52BE83167B33E32B4 /* Pods-LivenessDetection-LivenessDetectionTests.debug.xcconfig */,
+				0711E004E11083C44C28258B /* Pods-LivenessDetection-LivenessDetectionTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FC4552871DC98636C968F886 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E6D21C5C0C5EBB4246B228F /* Pods_LivenessDetection.framework */,
+				0841565BDA5601999AC89CA3 /* Pods_LivenessDetection_LivenessDetectionTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +210,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BADB0A5298D1DF4009F73C3 /* Build configuration list for PBXNativeTarget "LivenessDetection" */;
 			buildPhases = (
+				CF2B082AFF27A0BD388E12F9 /* [CP] Check Pods Manifest.lock */,
 				3BADB08C298D1DF4009F73C3 /* Headers */,
 				3BADB08D298D1DF4009F73C3 /* Sources */,
 				3BADB08E298D1DF4009F73C3 /* Frameworks */,
@@ -187,6 +229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BADB0A8298D1DF4009F73C3 /* Build configuration list for PBXNativeTarget "LivenessDetectionTests" */;
 			buildPhases = (
+				06E9CEB0A975B0B5BF7893D8 /* [CP] Check Pods Manifest.lock */,
 				3BADB097298D1DF4009F73C3 /* Sources */,
 				3BADB098298D1DF4009F73C3 /* Frameworks */,
 				3BADB099298D1DF4009F73C3 /* Resources */,
@@ -264,6 +307,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06E9CEB0A975B0B5BF7893D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LivenessDetection-LivenessDetectionTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF2B082AFF27A0BD388E12F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LivenessDetection-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3BADB08D298D1DF4009F73C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -277,7 +367,9 @@
 				3B76E21E2A6B142400C59B0D /* SpoofDetector4.swift in Sources */,
 				3B76E2202A6B169200C59B0D /* SpoofDetector4Component.swift in Sources */,
 				3BADB0B0298D1F2C009F73C3 /* WaveletDecomposition.swift in Sources */,
+				3B364A172ABC90D400E72A88 /* SpoofDetector5.swift in Sources */,
 				3BADB0B4298D1FAF009F73C3 /* DetectedSpoofDevice.swift in Sources */,
+				3B364A1B2ABCC48F00E72A88 /* SpoofDetector5Config.swift in Sources */,
 				3BADB0BA298D2290009F73C3 /* ImageProcessingError.swift in Sources */,
 				3BADB0B2298D1F88009F73C3 /* SpoofDeviceDetector.swift in Sources */,
 				3BCE0EEC29B22F6800619853 /* SpoofDetector3.swift in Sources */,
@@ -289,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB2BCD6299FB47500CCEA18 /* MoireDetectorTest.swift in Sources */,
+				3B364A1D2ABCC84000E72A88 /* SpoofDetector5Test.swift in Sources */,
 				3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */,
 				3B76E2242A6E9E7E00C59B0D /* SpoofDetector4Test.swift in Sources */,
 				3BB2BCD4299FAB6400CCEA18 /* BaseTest.swift in Sources */,
@@ -435,6 +528,7 @@
 		};
 		3BADB0A6298D1DF4009F73C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA0490D8B20B550EB3284CED /* Pods-LivenessDetection.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -462,6 +556,7 @@
 		};
 		3BADB0A7298D1DF4009F73C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 207682A7C62F3C323821BFE2 /* Pods-LivenessDetection.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -489,12 +584,13 @@
 		};
 		3BADB0A9298D1DF4009F73C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD4765D52BE83167B33E32B4 /* Pods-LivenessDetection-LivenessDetectionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -505,12 +601,13 @@
 		};
 		3BADB0AA298D1DF4009F73C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0711E004E11083C44C28258B /* Pods-LivenessDetection-LivenessDetectionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;

@@ -13,5 +13,6 @@ public enum ImageProcessingError: Error {
     cgImageFromBufferError,
     imageMatrixMultiplyError,
     imageRotationError,
-    imageResizingError
+    imageResizingError,
+    imageIsBlurry
 }

@@ -8,16 +8,55 @@
 import XCTest
 import UIKit
 import ZIPFoundation
+import UniformTypeIdentifiers
 @testable import LivenessDetection
 
 final class LivenessDetectionTests: BaseTest<SpoofDetection> {
     
+    var detectorCombinations: [SpoofDetector] = []
+    
     override var expectedSuccessRate: Float {
         0.83
     }
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        let psd001 = try self.createSpoofDeviceDetector()
+        let psd002 = try self.createMoireDetector()
+        let psd003 = try self.createSpoofDetector3()
+        self.detectorCombinations = [
+            SpoofDetection(psd001, psd002, psd003),
+            SpoofDetection(psd001, psd002),
+            SpoofDetection(psd001, psd003),
+            SpoofDetection(psd002, psd003),
+            SpoofDetection(psd001),
+            SpoofDetection(psd002),
+            SpoofDetection(psd003)
+        ]
+    }
         
     override func createSpoofDetector() throws -> SpoofDetection {
-        try SpoofDetection(self.createMoireDetector(), self.createSpoofDeviceDetector(), self.createSpoofDetector3(), self.createSpoofDetector4())
+        try SpoofDetection(self.createSpoofDeviceDetector(), self.createMoireDetector(), self.createSpoofDetector3())
+    }
+    
+    func test_detectSpoofInImages_outputCSV() throws {
+        var csv = "\"File\",\"Is live\""
+        for spoofDetector in self.detectorCombinations {
+            csv.append(",\"\(spoofDetector.identifier)\"")
+        }
+        try self.withEachImage(types: [.moire, .spoofDevice]) { image, url, positive in
+            let transform = CGAffineTransform(scaleX: image.size.width, y: image.size.height)
+            let face = try self.detectFaceInImage(image)?.boundingBox.applying(transform)
+            csv += String(format: "\n\"%@\",%d", url.lastPathComponent, positive ? 0 : 1)
+            for spoofDetector in self.detectorCombinations {
+                let score = try spoofDetector.detectSpoofInImage(image, regionOfInterest: face)
+                csv += String(format: ",%.03f", score)
+            }
+        }
+        let attachment = XCTAttachment(data: csv.data(using: .utf8)!, uniformTypeIdentifier: UTType.commaSeparatedText.identifier)
+        attachment.lifetime = .keepAlways
+        attachment.name = "Scores.csv"
+        self.add(attachment)
     }
     
     func test_livenessDetection_attachAnnotatedImages() throws {
