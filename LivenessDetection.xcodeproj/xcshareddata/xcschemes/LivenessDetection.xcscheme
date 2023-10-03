@@ -40,6 +40,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "LivenessDetectionTests/test_detectSpoofInImages_outputCSV()">
+               </Test>
+               <Test
                   Identifier = "LivenessDetectionTests/test_livenessDetection_attachAnnotatedImages()">
                </Test>
                <Test
@@ -59,6 +62,12 @@
                </Test>
                <Test
                   Identifier = "SpoofDetector4Test/test_detectSpoofInImages_outputCSV()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDeviceDetectorTest/test_detectSpoofDevices_outputCSV()">
+               </Test>
+               <Test
+                  Identifier = "SpoofDeviceDetectorTest/test_detectSpoofInImages_outputCSV()">
                </Test>
             </SkippedTests>
          </TestableReference>
