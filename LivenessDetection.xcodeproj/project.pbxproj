@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B1864142B70F4E40050EF97 /* spoof_images.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B1864122B70F4E40050EF97 /* spoof_images.txt */; };
+		3B1864152B70F4E40050EF97 /* live_images.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B1864132B70F4E40050EF97 /* live_images.txt */; };
+		3B1E99992AEABAFC0096B669 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E99982AEABAFC0096B669 /* ResultViewController.swift */; };
+		3B1E999A2AEABE000096B669 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A149C2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage */; };
+		3B1E999C2AEAD96A0096B669 /* MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E999B2AEAD96A0096B669 /* MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel */; };
+		3B1E999E2AEADA230096B669 /* ARC_PSD-003_1.0.16_TRCD.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E999D2AEADA230096B669 /* ARC_PSD-003_1.0.16_TRCD.mlmodel */; };
+		3B1E99A02AEAE2E70096B669 /* LivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */; };
+		3B1E99A12AEAE2E70096B669 /* LivenessDetection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B1E99A62AEBA9830096B669 /* FaceDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E99A52AEBA9830096B669 /* FaceDetection.swift */; };
+		3B1E99A82AEBAB830096B669 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1E99A72AEBAB830096B669 /* ImageUtils.swift */; };
 		3B41991329B882B4003AB87E /* SpoofDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991229B882B4003AB87E /* SpoofDetection.swift */; };
 		3B41991529B88319003AB87E /* SpoofDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B41991429B88319003AB87E /* SpoofDetector.swift */; };
 		3B41997629BA70DE003AB87E /* test_input.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B41997529BA70DC003AB87E /* test_input.json */; };
@@ -17,6 +27,13 @@
 		3B76E2242A6E9E7E00C59B0D /* SpoofDetector4Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */; };
 		3B76E2262A6EF65400C59B0D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76E2252A6EF65400C59B0D /* Utils.swift */; };
 		3B76E22C2A700CA900C59B0D /* bounding_boxes.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B76E22B2A700CA800C59B0D /* bounding_boxes.json */; };
+		3B9A149D2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A149C2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage */; };
+		3BAA5EEF2AEAB33A006EAFF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA5EEE2AEAB33A006EAFF0 /* AppDelegate.swift */; };
+		3BAA5EF12AEAB33A006EAFF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA5EF02AEAB33A006EAFF0 /* SceneDelegate.swift */; };
+		3BAA5EF32AEAB33A006EAFF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA5EF22AEAB33A006EAFF0 /* ViewController.swift */; };
+		3BAA5EF62AEAB33A006EAFF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA5EF42AEAB33A006EAFF0 /* Main.storyboard */; };
+		3BAA5EF82AEAB33E006EAFF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA5EF72AEAB33E006EAFF0 /* Assets.xcassets */; };
+		3BAA5EFB2AEAB33E006EAFF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA5EF92AEAB33E006EAFF0 /* LaunchScreen.storyboard */; };
 		3BADB09C298D1DF4009F73C3 /* LivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */; };
 		3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */; };
 		3BADB0AC298D1E6E009F73C3 /* MoireDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0AB298D1E6E009F73C3 /* MoireDetector.swift */; };
@@ -24,6 +41,8 @@
 		3BADB0B2298D1F88009F73C3 /* SpoofDeviceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */; };
 		3BADB0B4298D1FAF009F73C3 /* DetectedSpoofDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */; };
 		3BADB0BA298D2290009F73C3 /* ImageProcessingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BADB0B9298D2290009F73C3 /* ImageProcessingError.swift */; };
+		3BB289772AE7B793001A163B /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB289762AE7B792001A163B /* ImageIterator.swift */; };
+		3BB289792AE7F25B001A163B /* FaceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB289782AE7F25B001A163B /* FaceLoader.swift */; };
 		3BB2BCD4299FAB6400CCEA18 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2BCD3299FAB6400CCEA18 /* BaseTest.swift */; };
 		3BB2BCD6299FB47500CCEA18 /* MoireDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2BCD5299FB47500CCEA18 /* MoireDetectorTest.swift */; };
 		3BB2BCD8299FD49F00CCEA18 /* WaveletDecompositionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */; };
@@ -34,6 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3B1E99A22AEAE2E70096B669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BADB088298D1DF3009F73C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3BADB090298D1DF4009F73C3;
+			remoteInfo = LivenessDetection;
+		};
 		3BADB09D298D1DF4009F73C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3BADB088298D1DF3009F73C3 /* Project object */;
@@ -43,7 +69,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3B1E99A42AEAE2E70096B669 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3B1E99A12AEAE2E70096B669 /* LivenessDetection.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3B1864122B70F4E40050EF97 /* spoof_images.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spoof_images.txt; sourceTree = "<group>"; };
+		3B1864132B70F4E40050EF97 /* live_images.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = live_images.txt; sourceTree = "<group>"; };
+		3B1E99982AEABAFC0096B669 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		3B1E999B2AEAD96A0096B669 /* MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel"; sourceTree = "<group>"; };
+		3B1E999D2AEADA230096B669 /* ARC_PSD-003_1.0.16_TRCD.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "ARC_PSD-003_1.0.16_TRCD.mlmodel"; sourceTree = "<group>"; };
+		3B1E99A52AEBA9830096B669 /* FaceDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetection.swift; sourceTree = "<group>"; };
+		3B1E99A72AEBAB830096B669 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		3B41991229B882B4003AB87E /* SpoofDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetection.swift; sourceTree = "<group>"; };
 		3B41991429B88319003AB87E /* SpoofDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector.swift; sourceTree = "<group>"; };
 		3B41997529BA70DC003AB87E /* test_input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_input.json; sourceTree = "<group>"; };
@@ -54,8 +101,17 @@
 		3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDetector4Test.swift; sourceTree = "<group>"; };
 		3B76E2252A6EF65400C59B0D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3B76E22B2A700CA800C59B0D /* bounding_boxes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bounding_boxes.json; sourceTree = "<group>"; };
+		3B9A149C2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = "ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage"; sourceTree = "<group>"; };
 		3BA86E572991769100006E0B /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		3BA86E592991908100006E0B /* LivenessDetection.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = LivenessDetection.podspec; sourceTree = "<group>"; };
+		3BAA5EEC2AEAB33A006EAFF0 /* Passive Liveness Detection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Passive Liveness Detection.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BAA5EEE2AEAB33A006EAFF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3BAA5EF02AEAB33A006EAFF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3BAA5EF22AEAB33A006EAFF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3BAA5EF52AEAB33A006EAFF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3BAA5EF72AEAB33E006EAFF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3BAA5EFA2AEAB33E006EAFF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3BAA5EFC2AEAB33E006EAFF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LivenessDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB09B298D1DF4009F73C3 /* LivenessDetectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivenessDetectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BADB0A0298D1DF4009F73C3 /* LivenessDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivenessDetectionTests.swift; sourceTree = "<group>"; };
@@ -64,6 +120,8 @@
 		3BADB0B1298D1F88009F73C3 /* SpoofDeviceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofDeviceDetector.swift; sourceTree = "<group>"; };
 		3BADB0B3298D1FAF009F73C3 /* DetectedSpoofDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedSpoofDevice.swift; sourceTree = "<group>"; };
 		3BADB0B9298D2290009F73C3 /* ImageProcessingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingError.swift; sourceTree = "<group>"; };
+		3BB289762AE7B792001A163B /* ImageIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIterator.swift; sourceTree = "<group>"; };
+		3BB289782AE7F25B001A163B /* FaceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLoader.swift; sourceTree = "<group>"; };
 		3BB2BCD3299FAB6400CCEA18 /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		3BB2BCD5299FB47500CCEA18 /* MoireDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireDetectorTest.swift; sourceTree = "<group>"; };
 		3BB2BCD7299FD49F00CCEA18 /* WaveletDecompositionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveletDecompositionTest.swift; sourceTree = "<group>"; };
@@ -74,6 +132,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3BAA5EE92AEAB33A006EAFF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B1E99A02AEAE2E70096B669 /* LivenessDetection.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3BADB08E298D1DF4009F73C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +159,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B1E999F2AEAE2E70096B669 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3BAA5EED2AEAB33A006EAFF0 /* Passive Liveness Detection */ = {
+			isa = PBXGroup;
+			children = (
+				3B1E999D2AEADA230096B669 /* ARC_PSD-003_1.0.16_TRCD.mlmodel */,
+				3B1E999B2AEAD96A0096B669 /* MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel */,
+				3BAA5EEE2AEAB33A006EAFF0 /* AppDelegate.swift */,
+				3BAA5EF02AEAB33A006EAFF0 /* SceneDelegate.swift */,
+				3BAA5EF22AEAB33A006EAFF0 /* ViewController.swift */,
+				3BAA5EF42AEAB33A006EAFF0 /* Main.storyboard */,
+				3BAA5EF72AEAB33E006EAFF0 /* Assets.xcassets */,
+				3BAA5EF92AEAB33E006EAFF0 /* LaunchScreen.storyboard */,
+				3BAA5EFC2AEAB33E006EAFF0 /* Info.plist */,
+				3B1E99982AEABAFC0096B669 /* ResultViewController.swift */,
+			);
+			path = "Passive Liveness Detection";
+			sourceTree = "<group>";
+		};
 		3BADB087298D1DF3009F73C3 = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +191,9 @@
 				3BA86E572991769100006E0B /* build.sh */,
 				3BADB093298D1DF4009F73C3 /* LivenessDetection */,
 				3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */,
+				3BAA5EED2AEAB33A006EAFF0 /* Passive Liveness Detection */,
 				3BADB092298D1DF4009F73C3 /* Products */,
+				3B1E999F2AEAE2E70096B669 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +202,7 @@
 			children = (
 				3BADB091298D1DF4009F73C3 /* LivenessDetection.framework */,
 				3BADB09B298D1DF4009F73C3 /* LivenessDetectionTests.xctest */,
+				3BAA5EEC2AEAB33A006EAFF0 /* Passive Liveness Detection.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +230,9 @@
 		3BADB09F298D1DF4009F73C3 /* LivenessDetectionTests */ = {
 			isa = PBXGroup;
 			children = (
+				3B1864132B70F4E40050EF97 /* live_images.txt */,
+				3B1864122B70F4E40050EF97 /* spoof_images.txt */,
+				3B9A149C2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage */,
 				3B76E22B2A700CA800C59B0D /* bounding_boxes.json */,
 				3B41997729BA8677003AB87E /* test_output.json */,
 				3B41997529BA70DC003AB87E /* test_input.json */,
@@ -147,6 +243,10 @@
 				3BB2BCD9299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift */,
 				3BCFEC3F29B2AA9F00B0CC1E /* SpoofDetector3Test.swift */,
 				3B76E2232A6E9E7E00C59B0D /* SpoofDetector4Test.swift */,
+				3BB289762AE7B792001A163B /* ImageIterator.swift */,
+				3BB289782AE7F25B001A163B /* FaceLoader.swift */,
+				3B1E99A52AEBA9830096B669 /* FaceDetection.swift */,
+				3B1E99A72AEBAB830096B669 /* ImageUtils.swift */,
 			);
 			name = LivenessDetectionTests;
 			path = Sources/LivenessDetectionTests;
@@ -165,6 +265,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3BAA5EEB2AEAB33A006EAFF0 /* Passive Liveness Detection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BAA5EFD2AEAB33E006EAFF0 /* Build configuration list for PBXNativeTarget "Passive Liveness Detection" */;
+			buildPhases = (
+				3BAA5EE82AEAB33A006EAFF0 /* Sources */,
+				3BAA5EE92AEAB33A006EAFF0 /* Frameworks */,
+				3BAA5EEA2AEAB33A006EAFF0 /* Resources */,
+				3B1E99A42AEAE2E70096B669 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3B1E99A32AEAE2E70096B669 /* PBXTargetDependency */,
+			);
+			name = "Passive Liveness Detection";
+			productName = "Passive Liveness Detection";
+			productReference = 3BAA5EEC2AEAB33A006EAFF0 /* Passive Liveness Detection.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3BADB090298D1DF4009F73C3 /* LivenessDetection */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BADB0A5298D1DF4009F73C3 /* Build configuration list for PBXNativeTarget "LivenessDetection" */;
@@ -211,9 +330,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					3BAA5EEB2AEAB33A006EAFF0 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					3BADB090298D1DF4009F73C3 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -240,11 +362,22 @@
 			targets = (
 				3BADB090298D1DF4009F73C3 /* LivenessDetection */,
 				3BADB09A298D1DF4009F73C3 /* LivenessDetectionTests */,
+				3BAA5EEB2AEAB33A006EAFF0 /* Passive Liveness Detection */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3BAA5EEA2AEAB33A006EAFF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BAA5EFB2AEAB33E006EAFF0 /* LaunchScreen.storyboard in Resources */,
+				3BAA5EF82AEAB33E006EAFF0 /* Assets.xcassets in Resources */,
+				3BAA5EF62AEAB33A006EAFF0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3BADB08F298D1DF4009F73C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,8 +389,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B1864152B70F4E40050EF97 /* live_images.txt in Resources */,
 				3B41997829BA8678003AB87E /* test_output.json in Resources */,
 				3B41997629BA70DE003AB87E /* test_input.json in Resources */,
+				3B1864142B70F4E40050EF97 /* spoof_images.txt in Resources */,
 				3B76E22C2A700CA900C59B0D /* bounding_boxes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +400,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3BAA5EE82AEAB33A006EAFF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B1E999A2AEABE000096B669 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage in Sources */,
+				3B1E999C2AEAD96A0096B669 /* MoireDetectorModel_ep100_ntrn-627p-620n_02_res-98-99-96-0-5.mlmodel in Sources */,
+				3B1E999E2AEADA230096B669 /* ARC_PSD-003_1.0.16_TRCD.mlmodel in Sources */,
+				3BAA5EF32AEAB33A006EAFF0 /* ViewController.swift in Sources */,
+				3BAA5EEF2AEAB33A006EAFF0 /* AppDelegate.swift in Sources */,
+				3BAA5EF12AEAB33A006EAFF0 /* SceneDelegate.swift in Sources */,
+				3B1E99992AEABAFC0096B669 /* ResultViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3BADB08D298D1DF4009F73C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,19 +437,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B9A149D2AEA599E00FA1C15 /* ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70.mlpackage in Sources */,
 				3BB2BCD6299FB47500CCEA18 /* MoireDetectorTest.swift in Sources */,
 				3BCFEC4029B2AA9F00B0CC1E /* SpoofDetector3Test.swift in Sources */,
 				3B76E2242A6E9E7E00C59B0D /* SpoofDetector4Test.swift in Sources */,
+				3BB289792AE7F25B001A163B /* FaceLoader.swift in Sources */,
+				3BB289772AE7B793001A163B /* ImageIterator.swift in Sources */,
+				3B1E99A62AEBA9830096B669 /* FaceDetection.swift in Sources */,
 				3BB2BCD4299FAB6400CCEA18 /* BaseTest.swift in Sources */,
 				3BB2BCD8299FD49F00CCEA18 /* WaveletDecompositionTest.swift in Sources */,
 				3BADB0A1298D1DF4009F73C3 /* LivenessDetectionTests.swift in Sources */,
 				3BB2BCDA299FDCC300CCEA18 /* SpoofDeviceDetectorTest.swift in Sources */,
+				3B1E99A82AEBAB830096B669 /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3B1E99A32AEAE2E70096B669 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3BADB090298D1DF4009F73C3 /* LivenessDetection */;
+			targetProxy = 3B1E99A22AEAE2E70096B669 /* PBXContainerItemProxy */;
+		};
 		3BADB09E298D1DF4009F73C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3BADB090298D1DF4009F73C3 /* LivenessDetection */;
@@ -308,7 +467,95 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		3BAA5EF42AEAB33A006EAFF0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BAA5EF52AEAB33A006EAFF0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3BAA5EF92AEAB33E006EAFF0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BAA5EFA2AEAB33E006EAFF0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3BAA5EFE2AEAB33E006EAFF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CSD8L9EK66;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Passive Liveness Detection/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To detect liveness in captured photos";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appliedrec.Passive-Liveness-Detection";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3BAA5EFF2AEAB33E006EAFF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CSD8L9EK66;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Passive Liveness Detection/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To detect liveness in captured photos";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appliedrec.Passive-Liveness-Detection";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3BADB0A3298D1DF4009F73C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -451,6 +698,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetection;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -478,6 +726,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetection;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -494,7 +743,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -510,7 +760,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CSD8L9EK66;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appliedrec.LivenessDetectionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -522,6 +773,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3BAA5EFD2AEAB33E006EAFF0 /* Build configuration list for PBXNativeTarget "Passive Liveness Detection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BAA5EFE2AEAB33E006EAFF0 /* Debug */,
+				3BAA5EFF2AEAB33E006EAFF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3BADB08B298D1DF3009F73C3 /* Build configuration list for PBXProject "LivenessDetection" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

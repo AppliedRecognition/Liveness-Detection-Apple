@@ -78,9 +78,9 @@ final class SpoofDetector3Test: BaseTest<SpoofDetector3> {
         try withEachImage(types: [.spoofDevice,.moire]) { (image, url, positive) in
             let confidence = try self.spoofDetector.detectSpoofInImage(image)
             csv.append(String(format: "\n\"%@\",%@,%.03f,", url.lastPathComponent, positive ? "1" : "0", confidence))
-            if let face = try self.detectFaceInImage(image) {
-                let faceImage = self.image(image, croppedToFace: face)
-                let eyeRegionImage = self.image(image, croppedToEyeRegionsOfFace: face)
+            if let face = try FaceDetection.detectFacesInImage(image).first {
+                let faceImage = ImageUtils.image(image, croppedToRegion: face.bounds)
+                let eyeRegionImage = ImageUtils.image(image, croppedToEyeRegionsOfFace: face)
                 let faceCropConfidence = try self.spoofDetector.detectSpoofInImage(faceImage)
                 let eyeRegionCropConfidence = try self.spoofDetector.detectSpoofInImage(eyeRegionImage)
                 csv.append(String(format: "%.03f,%.03f", faceCropConfidence, eyeRegionCropConfidence))

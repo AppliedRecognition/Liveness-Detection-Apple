@@ -38,7 +38,12 @@ public class SpoofDetector3: SpoofDetector {
         try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL, identifier: String) throws {
+    /// Constructor
+    /// - Parameters:
+    ///   - compiledModelURL: URL of the compiled model file
+    ///   - identifier: Model identifier
+    /// - Since: 1.3.0   
+    public init(compiledModelURL: URL, identifier: String) throws {
         self.model = try MLModel(contentsOf: compiledModelURL)
         self.identifier = identifier
     }

@@ -257,7 +257,201 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T12-33-38.446Z.zip-1.jpg",
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T12-47-40.141Z.zip-1.jpg",
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-00-32.860Z.zip-1.jpg",
-        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-01-59.623Z.zip-1.jpg"
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-01-59.623Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-21-05.779Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-21-17.075Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-22-09.053Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-42-10.367Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-42-23.608Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-43-31.082Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-43-57.333Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-44-23.811Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T13-44-45.925Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T15-43-23.244Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T15-43-42.173Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-12T15-44-01.161Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T10-32-14.521Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T10-32-34.682Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T10-56-50.112Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T11-45-28.815Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T11-45-43.625Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T11-45-56.137Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-01-06.368Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-03-09.630Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-46-44.383Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-47-01.136Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-53-03.271Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-53-24.078Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-55-57.515Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T12-57-08.414Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T13-08-44.461Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T13-09-05.983Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T13-10-23.082Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T13-10-50.317Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T14-15-07.007Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T14-40-18.042Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-13T14-40-50.097Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-21-27.580Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-25-22.200Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-27-32.082Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-28-24.587Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-30-33.128Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-16T09-38-33.006Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-27-34.940Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-36-51.003Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-37-11.152Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-37-42.771Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-40-42.853Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-40-57.932Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-41-13.792Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-41-27.115Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-42-24.379Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T07-44-13.304Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T18-22-12.645Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-17T18-23-28.954Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-10.457Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-10.457Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-25.499Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-25.499Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-43.090Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-39-43.090Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-40-01.462Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-40-01.462Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-43-54.289Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-44-11.977Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-44-11.977Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-44-24.558Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T07-44-24.558Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T08-21-21.680Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T08-21-38.757Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T08-21-38.757Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T08-21-52.436Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T08-21-52.436Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-11-12.636Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-11-36.235Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-11-36.235Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-13-21.246Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-13-35.857Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-13-55.493Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-13-55.493Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T09-52-41.156Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-01-32.196Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-01-32.196Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-01-48.432Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-01-48.432Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-13-34.180Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-18-50.925Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T10-46-01.659Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T12-51-48.575Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-04-23.710Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-17-23.082Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-41-12.545Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-55-05.730Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-55-38.430Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-55-52.800Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-56-06.961Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-56-06.961Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-57-00.498Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-57-21.598Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-57-40.445Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-57-56.990Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-57-56.990Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-58-11.711Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-58-41.907Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-58-41.907Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-58-55.593Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-58-55.593Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-09.130Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-09.130Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-37.264Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-37.264Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-52.089Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T13-59-52.089Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-11.344Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-11.344Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-30.490Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-30.490Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-46.984Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-02-46.984Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-01.858Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-01.858Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-19.151Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-19.151Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-36.530Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-03-48.845Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-13.273Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-13.273Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-26.690Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-26.690Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-44.711Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-04-44.711Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-25.238Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-25.238Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-38.514Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-38.514Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-56.815Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-06-56.815Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-08-09.171Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T14-08-09.171Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-18T15-02-20.124Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-37-29.415Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-37-54.981Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-38-42.903Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-38-42.903Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-39-00.219Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-39-00.219Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-39-45.224Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-39-45.224Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-50-29.992Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-50-29.992Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-53-01.099Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-53-15.818Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-53-15.818Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-53-38.431Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T07-53-38.431Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-03-19.529Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-03-36.497Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-03-36.497Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-39-20.336Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-39-39.875Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-39-58.478Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-40-37.253Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-19T12-40-37.253Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-07-27.910Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-07-37.640Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-07-49.104Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-07-49.104Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-15-41.504Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T08-15-41.504Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-20-52.527Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-32-12.938Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-32-12.938Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-33-23.059Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-33-23.059Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-36-32.333Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T09-36-32.333Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-48-51.213Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-48-51.213Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-06.840Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-06.840Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-20.698Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-20.698Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-35.229Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T10-49-35.229Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-34-44.770Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-34-58.018Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-39-42.823Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-39-42.823Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-39-58.636Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-40-59.370Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-40-59.370Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-41-25.831Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-41-25.831Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-50-42.007Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-50-42.007Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-52-50.783Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-53-08.834Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/live/2023-10-20T14-53-29.725Z.zip-1.jpg",
     ]
     let spoof = [
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-09-14T09-56-30.522Z.zip-1.jpg",
@@ -444,7 +638,172 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-02-14.360Z.zip-1.jpg",
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-02-29.252Z.zip-1.jpg",
         "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-02-46.737Z.zip-1.jpg",
-        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-03-20.993Z.zip-1.jpg"
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-03-20.993Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-45-41.252Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-45-53.528Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T13-46-03.792Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T15-45-09.714Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-12T15-45-40.404Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-33-03.822Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-33-20.865Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-33-40.923Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-39-14.817Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-39-51.199Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-40-04.075Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-40-15.961Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-40-34.400Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-40-46.983Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-41-06.132Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-41-20.774Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T10-57-22.971Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-01-44.853Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-01-58.781Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-02-13.821Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-02-26.352Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-02-44.263Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-02-57.862Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-49-20.146Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-49-30.288Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-50-24.280Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-50-42.106Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-50-55.239Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-52-18.129Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-52-57.009Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-55-58.140Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-56-11.048Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-57-57.553Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-07.568Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-16.855Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-31.406Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-32.239Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-43.002Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-43.819Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-58-59.414Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T12-59-10.638Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-11-19.687Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-11-29.240Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-12-13.799Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-12-28.881Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-12-45.477Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-13-38.470Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-13-52.432Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-14-02.755Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-14-26.827Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-14-41.724Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-14-51.044Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-16-05.439Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-16-15.400Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-16-27.918Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-16-38.436Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-16-59.028Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-17-11.719Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-17-44.545Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-17-58.449Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-18-10.362Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T13-18-22.510Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-14-24.662Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-14-53.774Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-41-17.028Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-41-28.718Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-41-40.282Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-41-51.532Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-42-36.195Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-42-48.555Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-42-59.937Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-43-39.954Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-43-51.853Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-44-15.022Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-44-25.772Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-44-37.012Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-44-47.819Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T14-44-58.224Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-04-56.115Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-05-08.399Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-05-17.599Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-05-27.256Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-05-37.266Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-06-03.820Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-06-13.892Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-06-33.939Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-06-43.618Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-06-54.427Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-04.189Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-14.434Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-23.473Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-32.722Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-42.565Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-07-52.888Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-03.437Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-16.369Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-27.778Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-36.852Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-46.445Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-08-56.171Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-09-05.885Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-09-43.118Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-09-52.673Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-11-07.177Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-11-16.977Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-11-26.130Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-11-38.491Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-11-47.776Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-12-04.878Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-12-14.261Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-12-24.335Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-12-34.210Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-13-29.350Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-13-38.517Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T15-13-47.746Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-12-04.446Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-12-17.040Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-12-40.050Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-12-51.875Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-13-01.788Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-13-15.880Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-13-27.517Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-13-44.320Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-13-55.065Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-14-12.739Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-14-22.609Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-14-33.192Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-14-56.259Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-15-17.256Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-15-25.899Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-13T18-15-59.210Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-22-22.165Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-22-38.354Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-26-26.594Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-26-45.456Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-27-05.787Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-27-20.836Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-27-46.223Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-27-58.187Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-28-13.540Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-28-38.526Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-35-32.832Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-35-53.576Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-36-11.610Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-36-24.588Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-16T09-36-37.015Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-17T07-35-34.723Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-17T07-38-30.182Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-17T07-38-48.040Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-17T07-39-16.433Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-17T07-39-37.708Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-18T13-11-10.962Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-18T14-19-41.932Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-18T14-20-07.444Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-18T14-20-27.176Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-22-51.743Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-23-07.255Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-24-25.513Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-25-27.413Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-25-27.413Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-44-19.259Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-44-37.964Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-44-56.304Z.zip-1.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T09-44-56.304Z.zip-2.jpg",
+        "https://ver-id.s3.amazonaws.com/test_images/liveness-detection/ADP/spoof/2023-10-20T14-54-17.191Z.zip-1.jpg",
     ]
 
     
@@ -546,7 +905,7 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         var fpCount = 0
         var fnCount = 0
         try self.withEachImage(types: [.moire,.spoofDevice]) { image, url, positive in
-            let roi = try self.detectFaceInImage(image)?.boundingBox
+            let roi = try FaceDetection.detectFacesInImage(image).first?.bounds
             let isSpoof = try self.spoofDetector.isSpoofedImage(image, regionOfInterest: roi)
             if positive && !isSpoof {
                 fnCount += 1
@@ -571,7 +930,7 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         measureOptions.invocationOptions = [.manuallyStart, .manuallyStop]
         self.measure(options: measureOptions) {
             do {
-                let roi = try self.detectFaceInImage(image)?.boundingBox
+                let roi = try FaceDetection.detectFacesInImage(image).first?.bounds
                 self.startMeasuring()
                 _ = try self.spoofDetector.detectSpoofInImage(image, regionOfInterest: roi)
                 self.stopMeasuring()
@@ -684,37 +1043,11 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         return try SpoofDetector4(modelURL1: self.spoofDetector4ModelURLs[0], modelURL2: self.spoofDetector4ModelURLs[1])
     }
     
-    func image(_ image: UIImage, croppedToEyeRegionsOfFace face: VNFaceObservation) -> UIImage {
-        guard let rightEye = face.landmarks?.leftPupil?.pointsInImage(imageSize: image.size).first else {
-            return image
-        }
-        guard let leftEye = face.landmarks?.rightPupil?.pointsInImage(imageSize: image.size).first else {
-            return image
-        }
-        let distanceBetweenEyes = hypot(rightEye.y - leftEye.y, rightEye.x - leftEye.x)
-        let cropRect = CGRect(x: leftEye.x - distanceBetweenEyes * 0.75, y: min(leftEye.y, rightEye.y) - distanceBetweenEyes * 0.5, width: distanceBetweenEyes * 2.5, height: distanceBetweenEyes)
-        UIGraphicsBeginImageContext(cropRect.size)
-        defer {
-            UIGraphicsEndImageContext()
-        }
-        image.draw(at: CGPoint(x: 0-cropRect.minX, y: 0-cropRect.minY))
-        return UIGraphicsGetImageFromCurrentImageContext()!
-    }
-    
-    func image(_ image: UIImage, croppedToFace face: VNFaceObservation) -> UIImage {
-        UIGraphicsBeginImageContext(face.boundingBox.size)
-        defer {
-            UIGraphicsEndImageContext()
-        }
-        image.draw(at: CGPoint(x: 0-face.boundingBox.minX, y: 0-face.boundingBox.minY))
-        return UIGraphicsGetImageFromCurrentImageContext()!
-    }
-    
     func failRatioOfDetectionOnEachImage(_ detector: SpoofDetector, detectFace: Bool) throws -> Float {
         var detectionCount: Float = 0
         var failCount: Float = 0
         try withEachImage(types: [.spoofDevice]) { (image, url, positive) in
-            let roi = try self.detectFaceInImage(image)?.boundingBox
+            let roi = try FaceDetection.detectFacesInImage(image).first?.bounds
             let isSpoof = try detector.isSpoofedImage(image, regionOfInterest: roi)
             let success = (positive && isSpoof) || (!positive && !isSpoof)
             detectionCount += 1
@@ -731,7 +1064,7 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
         var totalCount: Float = 0
         try withEachImage(types: [.moire,.spoofDevice]) { (image, url, positive) in
             totalCount += 1
-            let roi = try self.detectFaceInImage(image)?.boundingBox
+            let roi = try FaceDetection.detectFacesInImage(image).first?.bounds
             var isSpoof: Bool = false
             for detector in detectors {
                 if try detector.isSpoofedImage(image, regionOfInterest: roi) {
@@ -746,26 +1079,6 @@ class BaseTest<T: SpoofDetector>: XCTestCase {
             }
         }
         return (fpCount / totalCount, fnCount / totalCount)
-    }
-    
-    func detectFaceInImage(_ image: UIImage) throws -> VNFaceObservation? {
-        let cgImage = try self.cgImage(from: image)
-        let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: image.imageOrientation.cgImagePropertyOrientation, options: [:])
-        let request = VNDetectFaceRectanglesRequest()
-        request.usesCPUOnly = true
-        try imageRequestHandler.perform([request])
-        return request.results?.first
-    }
-    
-    func detectFacesInImage(_ image: UIImage) throws -> [CGRect] {
-        let cgImage = try self.cgImage(from: image)
-        let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: image.imageOrientation.cgImagePropertyOrientation, options: [:])
-        let request = VNDetectFaceRectanglesRequest()
-        request.usesCPUOnly = true
-        try imageRequestHandler.perform([request])
-        return request.results?.map { obs in
-            obs.boundingBox
-        } ?? []
     }
 }
 
@@ -802,5 +1115,12 @@ extension UIImage.Orientation {
         default:
             return .up
         }
+    }
+}
+
+extension String: LocalizedError {
+    
+    var localizedDescription: String {
+        self
     }
 }

@@ -17,10 +17,15 @@ import Accelerate
 @available(iOS 13, *)
 public class MoireDetector: SpoofDetector {
     
+    enum ScaleMode {
+        case resample, crop
+    }
+    
     let imageLongerSideLength: Int = 1000
     let imageShorterSideLength: Int = 750
     let waveletDecomposition: WaveletDecomposition
     let model: MLModel
+    var scaleMode: ScaleMode = .crop
     
     /// Asynchronous constructor
     /// - Parameter modelURL: Model file URL
@@ -38,7 +43,12 @@ public class MoireDetector: SpoofDetector {
         try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL, identifier: String) throws {
+    /// Constructor
+    /// - Parameters:
+    ///   - compiledModelURL: URL of the compiled model file
+    ///   - identifier: Model identifier
+    /// - Since: 1.3.0
+    public init(compiledModelURL: URL, identifier: String) throws {
         self.waveletDecomposition = WaveletDecomposition()
         self.model = try MLModel(contentsOf: compiledModelURL)
         self.identifier = identifier
@@ -51,7 +61,7 @@ public class MoireDetector: SpoofDetector {
     public var confidenceThreshold: Float = 0.45
     
     public func detectSpoofInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
-        return try self.detectMoireInImage(image)
+        return try self.detectMoireInImage(image, regionOfInterest: roi)
     }
     
     // MARK: -
@@ -61,8 +71,8 @@ public class MoireDetector: SpoofDetector {
     /// - Returns: Confidence score between `0.0` and `1.0` where `0` means 100% confidence that the image
     /// does not contain moire artifacts and `1` means 100% confidence that it does.
     /// - Since: 1.0.0
-    public func detectMoireInImage(_ image: CGImage) throws -> Float {
-        let (wavelet, columnCount) = try self.processImage(image)
+    public func detectMoireInImage(_ image: CGImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
+        let (wavelet, columnCount) = try self.processImage(image, regionOfInterest: roi)
         let (imgLL, imgLH, imgHL, imgHH) = self.waveletDecomposition.haarTransformArray(wavelet, columnCount: columnCount)
         let multiArrays = ["input_1": imgLL, "input_2": imgLH, "input_3": imgHL, "input_4": imgHH]
         let featureProvider = try self.featureProviderFromInput(multiArrays)
@@ -80,12 +90,12 @@ public class MoireDetector: SpoofDetector {
     /// does not contain moire artifacts and `1` means 100% confidence that it does.
     /// - Since: 1.1.0
     @available(iOS 13, *)
-    public func detectMoireInImage(_ image: UIImage) throws -> Float {
+    public func detectMoireInImage(_ image: UIImage, regionOfInterest roi: CGRect? = nil) throws -> Float {
         guard let cgImage: CGImage = self.cgImageFromUIImage(image) else {
             throw ImageProcessingError.cgImageConversionError
         }
         let rotatedImage = try self.rotateCGImage(cgImage, orientation: image.imageOrientation)
-        return try self.detectMoireInImage(rotatedImage)
+        return try self.detectMoireInImage(rotatedImage, regionOfInterest: roi)
     }
     
     func cgImageFromUIImage(_ uiImage: UIImage) -> CGImage? {
@@ -126,8 +136,8 @@ public class MoireDetector: SpoofDetector {
         return try MLDictionaryFeatureProvider(dictionary: dict)
     }
     
-    func processImage(_ image: CGImage) throws -> ([UInt8],Int) {
-        guard let resizedImage = self.resizeImage(image) else {
+    func processImage(_ image: CGImage, regionOfInterest roi: CGRect? = nil) throws -> ([UInt8],Int) {
+        guard let resizedImage = self.resizeImage(image, regionOfInterest: roi) else {
             throw ImageProcessingError.imageResizingError
         }
         let orientation: CGImagePropertyOrientation = resizedImage.width > resizedImage.height ? .up : .left
@@ -273,23 +283,75 @@ public class MoireDetector: SpoofDetector {
         return (grayscaleData, Int(outWidth))
     }
     
-    func resizeImage(_ image: CGImage) -> CGImage? {
+    func resizeImage(_ image: CGImage, regionOfInterest roi: CGRect? = nil) -> CGImage? {
         let size: CGSize
+        let uiImage = UIImage(cgImage: image)
+        let imageSize: CGSize = uiImage.size
         if image.width > image.height {
             size = CGSize(width: self.imageLongerSideLength, height: self.imageShorterSideLength)
         } else {
             size = CGSize(width: self.imageShorterSideLength, height: self.imageLongerSideLength)
         }
-        let uiImage = UIImage(cgImage: image)
-        UIGraphicsBeginImageContext(size)
-        defer {
-            UIGraphicsEndImageContext()
+        if imageSize < size || self.scaleMode == .resample {
+            return UIGraphicsImageRenderer(size: size).image { context in
+                uiImage.draw(in: CGRect(origin: .zero, size: size))
+            }.cgImage
+        } else if let face = roi {
+            let imageRect = CGRect(origin: .zero, size: imageSize)
+            var cropRect = CGRect(x: face.midX - size.width / 2, y: face.midY - size.height / 2, width: size.width, height: size.height)
+            let intersection = imageRect.intersection(cropRect)
+            if intersection < cropRect {
+                if cropRect.minX < 0 {
+                    cropRect.origin.x = 0
+                }
+                if cropRect.minY < 0 {
+                    cropRect.origin.y = 0
+                }
+                if cropRect.maxX > imageSize.width {
+                    cropRect.origin.x -= cropRect.maxX - imageSize.width
+                }
+                if cropRect.maxY > imageSize.height {
+                    cropRect.origin.y -= cropRect.maxY - imageSize.height
+                }
+                return UIGraphicsImageRenderer(size: size).image { context in
+                    uiImage.draw(in: cropRect)
+                }.cgImage
+            } else {
+                return UIGraphicsImageRenderer(size: size).image { context in
+                    uiImage.draw(in: cropRect)
+                }.cgImage
+            }
+        } else {
+            let cropRect = CGRect(x: imageSize.width / 2 - size.width / 2, y: imageSize.height / 2 - size.height / 2, width: size.width, height: size.height)
+            return UIGraphicsImageRenderer(size: size).image { context in
+                uiImage.draw(in: cropRect)
+            }.cgImage
         }
-        uiImage.draw(in: CGRect(origin: .zero, size: size))
-        return UIGraphicsGetImageFromCurrentImageContext()?.cgImage
     }
 }
 
 enum MoireDetectorError: Int, Error {
     case predictionFailure, failedToInferMultiArrayShape
+}
+
+extension CGSize: Comparable {
+    
+    var area: CGFloat {
+        self.width * self.height
+    }
+    
+    public static func < (lhs: CGSize, rhs: CGSize) -> Bool {
+        lhs.area < rhs.area
+    }
+}
+
+extension CGRect: Comparable {
+    
+    var area: CGFloat {
+        self.size.area
+    }
+    
+    public static func < (lhs: CGRect, rhs: CGRect) -> Bool {
+        lhs.area < rhs.area
+    }
 }

@@ -7,6 +7,7 @@
 
 import XCTest
 import Accelerate
+import UniformTypeIdentifiers
 @testable import LivenessDetection
 
 final class MoireDetectorTest: BaseTest<MoireDetector> {
@@ -38,6 +39,26 @@ final class MoireDetectorTest: BaseTest<MoireDetector> {
         } else {
             throw NSError()
         }
+    }
+    
+    func test_compareImageScalingModes_attachCSV() throws {
+        var csv = "\"Image\",\"Is spoof\",\"Resampled image score\",\"Cropped image score\""
+        try self.withEachImage(types: [.moire]) { image, url, positive in
+            let roi = try FaceDetection.detectFacesInImage(image).first?.bounds
+            self.spoofDetector.scaleMode = .resample
+            let resampleScore = try self.spoofDetector.detectSpoofInImage(image, regionOfInterest: roi)
+            self.spoofDetector.scaleMode = .crop
+            let cropScore = try self.spoofDetector.detectSpoofInImage(image, regionOfInterest: roi)
+            csv.append(String(format: "\n\"%@\",%d,%.03f,%.03f", url.lastPathComponent, positive ? 1 : 0, resampleScore, cropScore))
+        }
+        guard let data = csv.data(using: .utf8) else {
+            XCTFail()
+            return
+        }
+        let attachment = XCTAttachment(data: data, uniformTypeIdentifier: UTType.commaSeparatedText.identifier)
+        attachment.lifetime = .keepAlways
+        attachment.name = "Moire image resizing comparison.csv"
+        self.add(attachment)
     }
     
     func test_verifyMoireDetectionInputAndOutput() throws {

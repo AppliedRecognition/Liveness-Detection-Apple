@@ -25,8 +25,7 @@ final class SpoofDetector4Test: BaseTest<SpoofDetector4> {
     func _test_detectSpoofInImages_outputCSV() throws {
         var csv = "Image,Positive,Score\n"
         try withEachImage(types: [.spoofDevice,.moire]) { (image, url, positive) in
-            let transform = CGAffineTransform(scaleX: image.size.width, y: image.size.height)
-            let faceRect = try self.detectFaceInImage(image)?.boundingBox.applying(transform)
+            let faceRect = try FaceDetection.detectFacesInImage(image).first?.bounds
             let score = try self.spoofDetector.detectSpoofInImage(image, regionOfInterest: faceRect)
             csv.append(String(format: "\"%@\",\"%d\",\"%.03f\"\n", url.lastPathComponent, NSNumber(value: positive).intValue, score))
         }

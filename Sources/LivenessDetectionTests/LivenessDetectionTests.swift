@@ -9,6 +9,7 @@ import XCTest
 import UIKit
 import ZIPFoundation
 import UniformTypeIdentifiers
+import Accelerate
 @testable import LivenessDetection
 
 final class LivenessDetectionTests: BaseTest<SpoofDetection> {
@@ -45,8 +46,7 @@ final class LivenessDetectionTests: BaseTest<SpoofDetection> {
             csv.append(",\"\(spoofDetector.identifier)\"")
         }
         try self.withEachImage(types: [.moire, .spoofDevice]) { image, url, positive in
-            let transform = CGAffineTransform(scaleX: image.size.width, y: image.size.height)
-            let face = try self.detectFaceInImage(image)?.boundingBox.applying(transform)
+            let face = try FaceDetection.detectFacesInImage(image).first?.bounds
             csv += String(format: "\n\"%@\",%d", url.lastPathComponent, positive ? 0 : 1)
             for spoofDetector in self.detectorCombinations {
                 let score = try spoofDetector.detectSpoofInImage(image, regionOfInterest: face)
@@ -57,6 +57,86 @@ final class LivenessDetectionTests: BaseTest<SpoofDetection> {
         attachment.lifetime = .keepAlways
         attachment.name = "Scores.csv"
         self.add(attachment)
+    }
+    
+    func test_outputScoresFromEachDetectorAsCSV() throws {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70", withExtension: "mlmodelc") else {
+            fatalError("Model package not found")
+        }
+        let spoofDeviceDetector = try SpoofDeviceDetector(compiledModelURL: modelURL, identifier: "ARC_PSD-001_1.1.122_bst_yl80201_NMS_ult201_cml70")
+        let moireDetector = try self.createMoireDetector()
+        let aenetDetector = try self.createSpoofDetector3()
+        let detectors: [SpoofDetector] = [spoofDeviceDetector, moireDetector, aenetDetector]
+        var csv = "\"File\",\"Is spoof\""+detectors.map { "\"\($0.identifier)\"" }.joined(separator: ",")
+        let imageIterator = ImageIterator()
+        while let (url, isSpoof, image) = imageIterator.next() {
+            let face = try FaceDetection.detectFacesInImage(image).first?.bounds
+            csv.append(String(format: "\n\"%@\",%@", url.lastPathComponent, isSpoof ? "true" : "false"))
+            let scores = try detectors.map { try $0.detectSpoofInImage(image, regionOfInterest: face) }.map { String(format: ",%.03f", $0) }
+            csv.append(scores.joined())
+        }
+        let attachment = XCTAttachment(data: csv.data(using: .utf8)!, uniformTypeIdentifier: UTType.commaSeparatedText.identifier)
+        attachment.lifetime = .keepAlways
+        attachment.name = "Scores.csv"
+        self.add(attachment)
+    }
+    
+    func test_compareSpoofDetectorCombinations() throws {
+        guard let faceLoader = FaceLoader() else {
+            XCTFail()
+            return
+        }
+        let spoofDetectors: [String:[SpoofDetector]] = [
+            "new": [SpoofDetection(try self.createSpoofDeviceDetector(), try self.createMoireDetector())],
+            "old": [try self.createMoireDetector(), try self.createSpoofDetector3(), try self.createSpoofDetector4()]
+        ]
+        var fpCounts: [String:Int] = ["new":0, "old":0]
+        var fnCounts: [String:Int] = ["new":0, "old":0]
+        var totalSpoofCount: Int = 0
+        var totalLiveCount: Int = 0
+        let threshold: Float = 0.5
+        let imageIterator = ImageIterator()
+        var csv = "\"File\",\"Is live\""
+        for spoofDetectorSet in spoofDetectors.values {
+            csv += ",\"\(spoofDetectorSet.map({ $0.identifier }).joined(separator: ", "))\",\"FP\",\"FN\""
+        }
+        while let (url, isSpoof, image) = imageIterator.next() {
+            let face = faceLoader.faceInImage(url.lastPathComponent)
+            if isSpoof {
+                totalSpoofCount += 1
+            } else {
+                totalLiveCount += 1
+            }
+            csv += "\n\"\(url.lastPathComponent)\",\(isSpoof ? "false" : "true")"
+            for (name, spoofDetectorSet) in spoofDetectors {
+                let scores = try spoofDetectorSet.map({ try $0.detectSpoofInImage(image, regionOfInterest: face) })
+                let score = vDSP.mean(scores)
+                let isFP = !isSpoof && score >= threshold
+                let isFN = isSpoof && score < threshold
+                if isFP {
+                    fpCounts[name] = fpCounts[name]! + 1
+                }
+                if isFN {
+                    fnCounts[name] = fnCounts[name]! + 1
+                }
+                csv += String(format: ",%.03f,%@,%@", score, isFP ? "true" : "false", isFN ? "true" : "false")
+            }
+        }
+        let csvAttachment = XCTAttachment(data: csv.data(using: .utf8)!, uniformTypeIdentifier: UTType.commaSeparatedText.identifier)
+        csvAttachment.lifetime = .keepAlways
+        csvAttachment.name = "Comparison.csv"
+        self.add(csvAttachment)
+        
+        var summary = String(format: "Total number of images: %d\nNumber of spoof images: %d\nNumber of live images: %d", totalLiveCount + totalSpoofCount, totalSpoofCount, totalLiveCount)
+        summary += String(format: "\nOld models FP count: %d/%d (%.02f%%)", fpCounts["old"]!, totalLiveCount, Float(fpCounts["old"]!) / Float(totalLiveCount) * 100)
+        summary += String(format: "\nOld models FN count: %d/%d (%.02f%%)", fnCounts["old"]!, totalSpoofCount, Float(fnCounts["old"]!) / Float(totalSpoofCount) * 100)
+        summary += String(format: "\nNew models FP count: %d/%d (%.02f%%)", fpCounts["new"]!, totalLiveCount, Float(fpCounts["new"]!) / Float(totalLiveCount) * 100)
+        summary += String(format: "\nNew models FN count: %d/%d (%.02f%%)", fnCounts["new"]!, totalSpoofCount, Float(fnCounts["new"]!) / Float(totalSpoofCount) * 100)
+        
+        let summaryAttachment = XCTAttachment(string: summary)
+        summaryAttachment.lifetime = .keepAlways
+        summaryAttachment.name = "Summary.txt"
+        self.add(summaryAttachment)
     }
     
     func test_livenessDetection_attachAnnotatedImages() throws {

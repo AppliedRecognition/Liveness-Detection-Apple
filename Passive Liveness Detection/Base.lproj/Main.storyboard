@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EJy-le-b5S">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Passive liveness detection-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Passive_Liveness_Detection" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spoofer" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Ao-heS">
+                                <rect key="frame" x="0.0" y="502" width="393" height="350"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="zJa-pg-n6O"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="Sga-2U-2Qg">
+                                <rect key="frame" x="16" y="102.99999999999999" width="361" height="175.66666666666663"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app uses machine learning models to detect whether a given image is live or spoofed." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUS-FG-qKl">
+                                        <rect key="frame" x="0.0" y="0.0" width="320.66666666666669" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rt-7y-wbS">
+                                        <rect key="frame" x="0.0" y="84" width="130.33333333333334" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Take a picture"/>
+                                        <connections>
+                                            <action selector="takePicture" destination="BYZ-38-t0r" eventType="touchUpInside" id="n3o-9l-6TF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcY-VL-MEb">
+                                        <rect key="frame" x="0.0" y="141.33333333333334" width="169" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Select from photos"/>
+                                        <connections>
+                                            <action selector="selectFromPhotos" destination="BYZ-38-t0r" eventType="touchUpInside" id="AqT-Dw-yYk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Sga-2U-2Qg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2rR-B1-ghA"/>
+                            <constraint firstItem="dsh-Ao-heS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8iK-a2-2V1"/>
+                            <constraint firstItem="Sga-2U-2Qg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="IhA-cj-UtL"/>
+                            <constraint firstAttribute="trailing" secondItem="dsh-Ao-heS" secondAttribute="trailing" id="QRd-5J-k7w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sga-2U-2Qg" secondAttribute="trailing" id="Rov-cO-2Of"/>
+                            <constraint firstAttribute="bottom" secondItem="dsh-Ao-heS" secondAttribute="bottom" id="vae-ud-WIN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Passive liveness detection" id="9hW-hq-igL"/>
+                    <connections>
+                        <segue destination="1d7-xl-jOt" kind="show" identifier="result" id="Nr0-MK-U8h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.770992366412212" y="3.5211267605633805"/>
+        </scene>
+        <!--Detecting liveness-->
+        <scene sceneID="J9k-VY-upR">
+            <objects>
+                <viewController id="1d7-xl-jOt" customClass="ResultViewController" customModule="Passive_Liveness_Detection" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YlO-YV-s8c">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nYp-5P-SVg">
+                                <rect key="frame" x="0.0" y="103" width="393" height="534.66666666666663"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DOh-1S-sR7">
+                                <rect key="frame" x="0.0" y="637.66666666666663" width="393" height="214.33333333333337"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="scoreCell" id="S36-fC-Uyl" customClass="ScoreCell" customModule="Passive_Liveness_Detection" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S36-fC-Uyl" id="vuA-rw-xfp">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14r-te-Mil">
+                                                    <rect key="frame" x="20" y="11.333333333333336" width="303" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-o5-jVV">
+                                                    <rect key="frame" x="331" y="11.333333333333336" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wcs-o5-jVV" firstAttribute="leading" secondItem="14r-te-Mil" secondAttribute="trailing" constant="8" id="6mx-g6-8u3"/>
+                                                <constraint firstItem="14r-te-Mil" firstAttribute="centerY" secondItem="vuA-rw-xfp" secondAttribute="centerY" id="9pO-53-U6d"/>
+                                                <constraint firstItem="Wcs-o5-jVV" firstAttribute="trailing" secondItem="vuA-rw-xfp" secondAttribute="trailingMargin" id="SOT-RA-bcb"/>
+                                                <constraint firstItem="Wcs-o5-jVV" firstAttribute="centerY" secondItem="vuA-rw-xfp" secondAttribute="centerY" id="a4s-xG-S1J"/>
+                                                <constraint firstItem="14r-te-Mil" firstAttribute="leading" secondItem="vuA-rw-xfp" secondAttribute="leadingMargin" id="edW-0W-5hh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="modelLabel" destination="14r-te-Mil" id="yFp-20-rbL"/>
+                                            <outlet property="scoreLabel" destination="Wcs-o5-jVV" id="ac1-ed-OEy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JiS-bw-pqy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nYp-5P-SVg" firstAttribute="top" secondItem="JiS-bw-pqy" secondAttribute="top" id="B1l-Wv-wae"/>
+                            <constraint firstItem="DOh-1S-sR7" firstAttribute="top" secondItem="nYp-5P-SVg" secondAttribute="bottom" id="BMU-5B-pQE"/>
+                            <constraint firstItem="DOh-1S-sR7" firstAttribute="leading" secondItem="JiS-bw-pqy" secondAttribute="leading" id="W8B-aR-1qV"/>
+                            <constraint firstAttribute="bottom" secondItem="DOh-1S-sR7" secondAttribute="bottom" id="lsj-df-w6M"/>
+                            <constraint firstAttribute="trailing" secondItem="nYp-5P-SVg" secondAttribute="trailing" id="mIP-um-4Qv"/>
+                            <constraint firstItem="nYp-5P-SVg" firstAttribute="leading" secondItem="YlO-YV-s8c" secondAttribute="leading" id="pFc-JN-3wz"/>
+                            <constraint firstItem="DOh-1S-sR7" firstAttribute="trailing" secondItem="JiS-bw-pqy" secondAttribute="trailing" id="v0a-jt-xBV"/>
+                            <constraint firstItem="DOh-1S-sR7" firstAttribute="height" secondItem="JiS-bw-pqy" secondAttribute="height" multiplier="0.3" id="zh8-OA-2aE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detecting liveness" id="yuT-3g-G7X">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="uzr-gk-TxX">
+                            <connections>
+                                <action selector="shareImage:" destination="1d7-xl-jOt" id="dcV-rf-yDH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="nYp-5P-SVg" id="MvT-9n-RUp"/>
+                        <outlet property="table" destination="DOh-1S-sR7" id="Yen-qV-dq2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wd3-8x-O4W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="823.66412213740455" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oV8-o7-Ffu">
+            <objects>
+                <navigationController id="EJy-le-b5S" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cpn-aH-Omx">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hmy-yj-RRs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oLi-R7-QQl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-781" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="spoofer" width="1041" height="1229"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

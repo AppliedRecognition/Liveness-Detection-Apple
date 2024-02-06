@@ -75,7 +75,12 @@ public class SpoofDeviceDetector: SpoofDetector {
         try self.init(compiledModelURL: compiledModelURL, identifier: modelURL.lastPathComponent)
     }
     
-    private init(compiledModelURL: URL, identifier: String) throws {
+    /// Constructor
+    /// - Parameters:
+    ///     - compiledModelURL: URL of the compiled model file
+    ///     - identifier: Model identifier
+    /// - Since: 1.3.0
+    public init(compiledModelURL: URL, identifier: String) throws {
         let spoofDetector: MLModel = try MLModel(contentsOf: compiledModelURL)
         self.model = try VNCoreMLModel(for: spoofDetector)
         self.identifier = identifier
